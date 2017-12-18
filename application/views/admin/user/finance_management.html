@@ -1,0 +1,81 @@
+{% include 'admin/iheader.html' %}
+{% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+	<a class="layui-btn layui-btn-mini" lay-event="examine">审批</a>
+</script>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initTabel();
+		},
+		initTabel: function() {
+			hm.load(function(option) {
+				var table = option.table;
+				var public = option.public;
+				public.showTable({
+					topTool: {
+						btnArr: [ 
+						{title: "高级搜索",type: "hSearch"},
+						{title: "批量删除",type: "plDel",class: "layui-btn-danger"},
+//						{title: "导入",type: "improt",},
+						{title: "导出",type: "export"}
+						]
+					},
+					cols: [{checkbox: true,},
+						{field: "om_refund-id",width: 80,sort: true,title: "主键",type: "",sear: "om_refund-id"},
+						{field: "um_user-username",width: 80,title: "用户名",type: "select",sear: "om_refund-uid",url:'/admin/api_user/grid',colKey:"uid",colName:"username"},
+						{field: "om_refund-oid",width: 80,title: "订单号",type: "",sear: "om_refund-oid"},
+						{field: "om_refund-status",width: 150,title: "退款状态",type: "",sear: "om_refund-status"},
+						{field: "am_admin-username",width: 150,title: "管理员",type: "select",sear: "om_refund-aid",url:'/admin/am/api_admin/grid',colKey:"am_admin.aid",colName:"am_admin.username"},
+						{field: "om_refund-remark",width: 150,title: "备注",type: "",sear: "om_refund-remark"},
+						{field: "om_refund-status",width: 150,title: "审核状态",type: "select",sear: "om_refund-status",enum:{0:"未审核",1:"审核成功",2:"审核失败"},examine:true},
+						{field: "om_refund-apply_at",width: 150,title: "申请时间",type: "time",sear: "om_refund-apply_at"},
+						{field: "om_refund-deal_at",width: 150,title: "处理时间",type: "time",sear: "om_refund-deal_at"},
+						{field: "right",width: 220,title: "操作",toolbar: ykp.$('#barDemo'),align: "center",fixed: 'right'}
+					],
+					reader: {
+						elem: "#tabel_user",
+						url: "{{base_url}}admin/am/api_refund/grid",
+						method: "post",
+						id: 'tabel_user',
+						data: getData
+					},
+					autoCol: true, //自定义列表,
+					tool: {
+						id: "om_refund-id",  //该行id字段名
+						//是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+						Event: [
+							{type: "detail",url: '{{base_url}}admin/user/infoActive?id='},
+							{type: "del",url: '{{base_url}}admin/api_product/del'},
+							 {type: "examine", url: '/admin/am/api_refund/change_status'},
+						]
+					},
+					topBtnActive: {
+						Event: [
+							{type: "pldel",url: '{{base_url}}admin/am/api_refund/delete'},
+							//{type: "improt",url: "/upload"},
+							//{type: "export",url: "/upload"}
+						]
+					}
+				});
+			});
+			
+			function getData(res,callback) {
+				console.log(res);
+				if(typeof callback == 'function') {
+					callback(res.data);
+				}
+				console.log(res.data);
+			}
+		}
+	});
+</script>
+</body>
+
+</html>

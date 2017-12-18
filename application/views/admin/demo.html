@@ -1,0 +1,322 @@
+{% include 'admin/iheader.html' %}
+
+	<style>
+		body {
+			margin: 10px;
+		}
+		
+		.demo-carousel {
+			height: 200px;
+			line-height: 200px;
+			text-align: center;
+		}
+		
+		.layui-table-view .layui-table {
+			width: 100%;
+		}
+		
+		.model {
+			padding: 20px;
+		}
+		.layui-table-tool{
+			padding: 4px 10px 0 0 !important;
+		}
+		.layui-form-switch{
+			position: relative;
+		    height: 22px;
+		    line-height: 22px;
+		    width: 54px !important;
+		    padding: 0 5px !important;
+		    border: 1px solid #d2d2d2;
+		    border-radius: 20px;
+		    cursor: pointer;
+		    margin: 0px;
+		}
+	</style>
+	{% include 'admin/crumbs.html' %}
+	<div class="layui-tab">
+		<ul class="layui-tab-title">
+			<li class="layui-this">网站设置</li>
+			<li>用户管理</li>
+			<li>权限分配</li>
+			<li>商品管理</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<div class="layui-btn-group demoTable">
+					<button class="layui-btn" style="height: 35px; line-height: 35px;" data-type="reload">搜索</button>
+					<button class="layui-btn" style="height: 35px; line-height: 35px;" data-type="exImport">导入</button>
+					<button class="layui-btn" style="height: 35px; line-height: 35px;" data-type="export">导出</button>
+					<button class="layui-btn layui-btn-danger" style="height: 35px; line-height: 35px;" data-type="pldel">批量删除</button>
+				</div>
+
+				<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+			
+				<div id="search" style="display: none;background: #eee; padding: 20px;" class="model">
+					<form class="layui-form layui-form-pane" id="form" style=" height: 100%; width: 100%;  display: flex;justify-content: center; flex-wrap: wrap">
+			
+					</form>
+				</div>
+				
+			</div>
+			<div class="layui-tab-item">内容2</div>
+			<div class="layui-tab-item">内容3</div>
+			<div class="layui-tab-item">内容4</div>
+		</div>
+	</div>
+	
+	
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+		<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+		<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+	</script>
+	
+	<script type="text/html" id="switchDemo">
+		<div class="layui-form-item">
+		      <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+		  </div>
+	</script>
+	
+	<script src="/resource/admin/layui/layui.js"></script>
+	<script src="/resource/admin/js/jslib/ykp.js"></script>
+	<script src="/resource/admin/js/jslib/public.js"></script>
+	<!--<script src="/resource/admin/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>-->
+	<script>
+		ykp.defineClass(['element', "jquery"], {
+			init: function() {
+				var it = this;
+				//初始化列表
+				it.init();
+			},
+
+			init: function() {
+
+				var cols = [{
+						checkbox: true,
+					},
+					{
+						field: "id",
+						width: 80,
+						sort: true,
+						title: "ID",
+						type: ""
+					},
+					{
+						field: "usernmae",
+						width: 80,
+						title: "用户名",
+						type: ""
+					},
+					{
+						field: "sex",
+						width: 80,
+						title: "性别",
+						type: ""
+					},
+					{
+						field: "city",
+						width: 150,
+						title: "城市",
+						type: ""
+					},
+					{
+						field: "sign",
+						width: 150,
+						title: "签名",
+						type: ""
+					},
+					{
+						field: "experience",
+						width: 150,
+						title: "积分",
+						type: ""
+					},
+					{
+						field: "score",
+						width: 150,
+						title: "评分",
+						type: ""
+					},
+					{
+						field: "classify",
+						width: 150,
+						title: "职业",
+						type: "time",
+						range:true
+					},
+					{
+						field: "wealth",
+						width: 150,
+						title: "财富",
+						toolbar: ykp.$('#switchDemo'),
+						type: "time",
+						
+					},
+					{
+						field: "right",
+						width: 160,
+						title: "操作",
+						toolbar: ykp.$('#barDemo'),
+						align:"center",
+						fixed: 'right',
+					},
+				];
+
+
+				layui.use(['laydate', 'form', 'layer', 'public', 'table'], function() {
+					$('.layui-tab-title').find('li').unbind('click').click(function() {
+						var index = $(this).index();
+//						console.log($('.layui-tab-content').find('.layui-tab-item').eq(index).text());
+					})
+					
+					
+					var table = layui.table;
+					var public = layui.public;
+					hm.getSearch({
+						data: cols,
+						el: "#form"
+					}); //遍历搜素demo
+
+					
+					//搜索框   时间范围  时间
+					public.timePicker([{
+						el:'#date8',
+						range:true,
+						format: 'yyyy/MM/dd'
+					},{
+						el:'#date9',
+						range:false,
+						format: 'yyyy/MM/dd'
+					}])
+
+					table.render({
+						elem: "#tabel_user",
+						url: '{{base_url}}admin/user/demo_data',
+						cols: [
+							cols
+						],
+						id: 'tabel_user',
+						skin: 'row', //表格风格
+						even:true,
+						page: true,
+						height: "full-220",
+						limits: [10, 20, 30, 45, 50, 100], //配置显示多少条数据
+						limit: 10, //每页默认显示的数量
+						where: {
+							id: 1
+						}
+					});
+					
+					
+					//表格里面   右侧工具栏点击事件
+					table.on('tool(tabel_user)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+						var data = obj.data, //获得当前行数据
+							layEvent = obj.event; //获得 lay-event 对应的值
+							var id = obj.data.id;
+							var parmas =  ykp.getSessionStorage('iframeId');
+						if(layEvent === 'detail') {  //查看详情
+							self.parent.document.getElementById(parmas).src = '{{base_url}}admin/user/pageInfo?id=' + id;
+						} else if(layEvent === 'edit') {  //编辑
+							self.parent.document.getElementById(parmas).src = '{{base_url}}admin/user/info?id='+id;
+						} else if(layEvent === 'del') {  //删除
+							layer.confirm('真的删除行么', function(index) {
+								obj.del(); //删除对应行（tr）的DOM结构
+								//删除批量删除							
+								hm.plDel({
+									data: id,
+									params: {
+										url: 'www.baidu.com',
+										method: 'post'
+									}
+								}, function(res) {
+									console.log(res);
+									search();
+								})
+								layer.close(index);
+							});
+						}
+					});
+					var active = {
+						//高级搜索
+						reload: function() {
+							public.layerOpen({
+								el: ykp.$('#search')
+							}, function() { //成功执行的回调
+								var searchCode = public.getSearchCode({
+									el: "#search"
+								});
+								console.log(searchCode);
+								if(!searchCode) {
+									ykp.prompt('最少输入一个条件');
+								} else {
+									search(searchCode);
+									public.emptyVal("#search");
+									layer.closeAll();
+								}
+							}, function() { //取消执行的回调
+								layer.closeAll();
+							}, function() {
+								public.emptyVal("#search");
+								return false;
+							})
+						},
+						//批量删除
+						pldel: function() {
+							var checkStatus = table.checkStatus('tabel_user'),
+								data = checkStatus.data;
+							if(data.length == 0) {
+								layer.msg('最少选中一个');
+								return false;
+							}
+							hm.plDel({
+								data: data,
+								params: {
+									url: '',
+									method: ''
+								}
+							}, function(res) {
+								console.log(res);
+								search();
+							})
+
+						},
+						exImport: function() {
+							layer.msg("导入");
+						},
+						export: function() {
+							layer.msg("导出");
+//							$("#tabel_user").table2excel({
+//								exclude: ".noExl",
+//								name: "Excel Document Name",
+//								filename: "myFileName",
+//								exclude_img: true,
+//								exclude_links: true,
+//								exclude_inputs: true
+//							});
+						}
+					};
+
+					$('.demoTable .layui-btn').on('click', function() {
+						var type = $(this).data('type');
+
+						active[type] ? active[type].call(this) : '';
+					});
+
+					//重复加载
+					function search(searchCode) {
+						var data = {};
+						if(searchCode) {
+							data.filter = searchCode;
+						}
+						table.reload('tabel_user', {
+							where: data
+						});
+					}
+				});
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 700px; padding-bottom: 30px;">
+</form>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [
+					{type: "text",name: "产品类型名称",verify:"tel",field: "name"},
+					{type: "time",name: "创建时间",field: "create_at"},
+					{type: "select",name: "是否删除",field: "is_del",sOption: {0: "未删除",1: "已删除"}}
+				],
+				selectKey:"",   //列字段id   例: id, product_id
+//				verifyData:{
+//					option: [{
+//						verifyDate: "password"
+//					}, {
+//						verifyDate: "tel"
+//					},{
+//						verifyDate: "test",
+//						match:[/\d+\.\d+\.\d+\.\d+ /, '请填写正确的ip']
+//					}],
+//					el: ".layui-form"
+//				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"/admin/api_product_type/info",   //编辑详情接口
+				addEditUrl:'/admin/Api_provider/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/user/provider'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>

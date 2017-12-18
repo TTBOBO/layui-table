@@ -1,0 +1,51 @@
+<div id="" style="border: 1px none #fafafa; border-bottom-style: solid;">
+    <span class="layui-breadcrumb" style="display: inline-block; padding: 10px;position:relative;top:-5px;">
+        <a href="http://www.my-haimai.com//admin/home/default_index">首页</a>
+        <a href="javascript:void(0)" class="crumbs">{{category}}</a>
+        <a><cite>{{title}}</cite></a>
+    </span>
+</div>
+<script>
+    $(function () {
+        $('.crumbs').unbind('click').click(function () {
+            var val = $(this).text().replace(/>/, '');
+            $('#sidebar-menu', window.parent.document).find('a').each(function () {
+                if ($(this).text().trim() == val) {
+                    var d = $(this),
+                            e = d.next();
+                    if (e.is(".treeview-menu") && e.is(":visible")) {
+                        e.slideUp(500, function () {
+                            e.removeClass("menu-open")
+                        }),
+                                e.parent("li").removeClass("active")
+                    } else if (e.is(".treeview-menu") && !e.is(":visible")) {
+                        var f = d.parents("ul").first(),
+                                g = f.find("ul:visible").slideUp(500);
+                        g.removeClass("menu-open");
+                        var h = d.parent("li");
+                        e.slideDown(500, function () {
+                            e.addClass("menu-open"),
+                                    f.find("li.active").removeClass("active"),
+                                    h.addClass("active");
+
+//							var _height1 = $(window).height() - $("#sidebar-menu >li.active").position().top - 41;
+//							var _height2 = $("#sidebar-menu li > ul.menu-open").height() + 10
+//							if(_height2 > _height1) {
+//								$("#sidebar-menu >li > ul.menu-open").css({
+//									overflow: "auto",
+//									height: _height1
+//								})
+//							}
+                        })
+                    }
+                    e.is(".treeview-menu");
+                }
+            })
+        })
+    })
+</script>
+<script src="/resource/admin/layui/layui.js"></script>
+<script src="/resource/admin/js/jslib/ykp.js"></script>
+<script src="/resource/admin/js/jslib/public.js"></script>
+<!--<script src="/resource/admin/js/jslib/jquery.table2excel.min.js"></script>-->
+<!--<script src="/resource/admin/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>-->

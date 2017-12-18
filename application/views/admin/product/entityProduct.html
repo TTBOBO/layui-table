@@ -1,0 +1,87 @@
+{% include 'admin/iheader.html' %}
+{% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initTabel();
+		},
+		initTabel: function() {
+			hm.load(function(option) {
+				var table = option.table;
+				var public = option.public;
+				public.showTable({
+					topTool: {
+						btnArr: [{title: "添加",type: "add"}, 
+						{title: "高级搜索",type: "hSearch",},
+						{title: "批量删除",type: "plDel",class: "layui-btn-danger"},
+						{title: "导出",type: "export",}]
+					},
+					cols: [{checkbox: true,},
+						{field: "id",width: 80,title: "产品ID",type: "",sear: "id"},
+						{field: "name",width: 120,title: "产品名称",type: "",sear: "name"},
+						{field: "description",width: 120,title: "产品描述",type: "",sear: "description",},
+						{field: "thumb",width: 150,title: "产品主图",type: "image",sear: "thumb"},
+						{field: "pics",width: 150,title: "图片地址",type: "image",sear: "pics",},
+						{field: "product_intro",width: 150,title: "产品宣传语",type: "",sear: "product_intro"},
+						{field: "service_list",width: 150,title: "服务列表id",type: "",sear: "service_list"},
+						{field: "presend_items",width: 150,title: "赠送项目",type: "",sear: "presend_items"},
+						{field: "price",width: 150,title: "价格",type: "",sear: "price"},
+						{field: "meal_items",width: 150,title: "套餐对应的价格",type: "",sear: "meal_items"},
+						{field: "is_single_price",width: 150,title: "是否单套餐",type: "select",sear: "is_single_price",enum: {0:"单套餐",1:"多套餐"}},
+						{field: "service_city",width: 150,title: "服务城市",type: "",sear: "service_city"},
+						{field: "service_limit",width: 150,title: "服务年限",type: "",sear: "service_limit"},
+						{field: "is_keep_price",width: 150,title: "保底押金",type: "",sear: "is_keep_price"},
+						{field: "discount_point",width: 150,title: "折扣",type: "",sear: "discount_point"},
+						{field: "create_at",width: 180,title: "创建时间",align: "center",type: "time",sear: "create_at"},
+						{field: "right", width: 180, title: "操作", toolbar: $('#barDemo'), align: "left", fixed: 'right', }
+					],
+					reader: {
+						elem: "#tabel_user",
+						url: "{{base_url}}/admin/Api_entity_product/grid",
+						method: "post",
+						id: 'tabel_user',
+						where: {
+							filter: ""
+						},
+						data: getData
+					},
+					autoCol: true, //自定义列表,
+					tool: {
+						id: "id",  //该行id字段名
+						//是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+						Event: [{type: "edit",url: '{{base_url}}admin/product/edit_entityProduct?id='},
+							{type: "detail",url: '{{base_url}}admin/product/info_entityProduct?id='},
+							{type: "del",url: '{{base_url}}admin/Api_entity_product/delete'}
+						]
+					},
+					topBtnActive: {
+						Event: [{type: "add",url: '{{base_url}}admin/product/add_entityProduct'},
+							{type: "plDel",url: '{{base_url}}admin/Api_entity_product/delete'}, 
+							{type: "export",url: "/upload"}
+						]
+					}
+				});
+			});
+			
+			function getData(res,callback) {
+				console.log(res);
+				if(typeof callback == 'function') {
+					callback(res.data);
+				}
+				console.log(res.data);
+			}
+		}
+	});
+</script>
+</body>
+
+</html>

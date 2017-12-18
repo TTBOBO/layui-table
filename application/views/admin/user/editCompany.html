@@ -1,0 +1,65 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 700px; padding-bottom: 30px;">
+</form>
+<script>
+
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [{type: "text",name: "id", display:true,field: "id"},
+				{type: "select",name: "公司名称",field: "company_name",url:"/admin/Api_company/grid",colKey:"id",colName:"company_name"},
+					{type: "upload",name: "企业logo",field: "logo"},
+					{type: "text",name: "公司网址",field: "website",verify:"url"},
+					{type: "text",name: "公司QQ",field: "qq",verify:"qq"},
+					{type:'upload',name:'营业执照图片',field:'business_license'},
+					{type:'text',name:'企业信用代码',field:'credit_code'},
+					{type:'text',name:'公司法人名称',field:'legal_person'},
+					{type:'text',name:'联系座机',field:'tel'},
+					{type:'text',name:'联系手机',field:'mobile',verify:"tel"}
+				],
+				/*{field: "uid",width: 80,title: "用户ID",type: "",sear: "um_company.uid"},
+					
+						{field: "legal_person",width: 150,title: "公司法人名称",type: "",sear: "um_company.legal_person"},
+						{field: "credit_code",width: 150,title: "企业信用代码",type: "",sear: "um_company.credit_code"},
+						{field: "tel",width: 120,title: "联系座机",type: "",sear: "um_company.tel"},
+						{field: "mobile",width: 120,title: "联系手机",type: "",sear: "um_company.mobile"},
+						{field: "alt_id",width: 120,title: "企业子账号ID",type: "",sear: "um_company.alt_id"},
+						{field: "program_ids",width: 120,title: "企业项目ID",type: "",sear: "um_company.program_ids"},
+						{field: "contract_ids",width: 120,title: "企业合同ID",type: "",sear: "um_company.contract_ids"},
+						{field: "create_at",width: 150,title: "创建时间",type: "time",sear: "um_company.create_at"},*/
+				selectKey:"id",   //列字段id   例: id, product_id
+//				verifyData:{
+//					option: [{
+//						verifyDate: "password"
+//					}, {
+//						verifyDate: "tel"
+//					},{
+//						verifyDate: "test",
+//						match:[/\d+\.\d+\.\d+\.\d+ /, '请填写正确的ip']
+//					}],
+//					el: ".layui-form"
+//				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"/admin/Api_company/info",   //编辑详情接口
+				addEditUrl:'/admin/Api_company/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/user/company'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>

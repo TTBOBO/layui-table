@@ -1,0 +1,70 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [{name: '用户ID',val: 'uid'},
+						{name: '收货人',val: 'receiver'},
+						{name: '手机号',val: 'mobile'},
+						{name: '手机号2',val: 'mobile2'},
+						{name: '手机号3',val: 'mobile3'},
+						{name: '座机',val: 'tel'},
+						{name: '省',val: 'prov'},
+						{name: '市',val: 'city'},
+						{name: '县',val: 'dist'},
+						{name: '街道',val: 'street'},
+						{name: '是否默认地址',val: 'default',select:true},
+						{name: '创建时间',val: 'create_at'},
+						{name: '更新时间',val: 'update_at'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/api_user_addr/info',
+					method: "post",
+					data: {
+						filter : "um_addr.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "default",
+								val: ['非默认', '默认']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>

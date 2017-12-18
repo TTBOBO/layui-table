@@ -1,0 +1,81 @@
+{% include 'admin/iheader.html' %}
+{% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+<script>
+    ykp.defineClass(['element', "jquery", 'laytpl'], {
+        init: function () {
+            var it = this;
+            //初始化列表
+            it.initTabel();
+        },
+        initTabel: function () {
+            hm.load(function (option) {
+                var table = option.table;
+                var public = option.public;
+                public.showTable({
+                    topTool: {
+                        btnArr: [
+                        		{title: "批量删除",type: "plDel",class: "layui-btn-danger",url: "{{base_url}}admin/api_product/del"},
+                            {title: "高级搜索", type: "hSearch"},
+                          	{title: "导出", type: "export"}
+						]
+                    },
+                    cols: [{checkbox: true, },
+                        {field: "id", width: 80, sort: true, title: "", type: "", sear: "id"},
+                        {field: "title", width: 80, title: "主题", type: "", sear: "title"},
+                        {field: "contact_name", width: 150, title: "留言者名字", type: "", sear: "contact_name",},
+                        {field: "email", width: 150, title: "留言人电子邮箱", type: "", sear: "email"},
+                        {field: "mobile", width: 150, title: "留言人电话", type: "", sear: "mobile"},
+                        {field: "qq", width: 150, title: "留言人qq", type: "", sear: "qq"},
+                        {field: "addr", width: 150, title: "留言人地址", sear: "addr"},
+                        {field: "ip", width: 200,  title: "ip地址", type: "", sear: "ip"},
+                        {field: "ischeck", width: 150, title: "是否审核", type: "select", sear: "ischeck",enum: {0:"是",1:"否"}},
+                        {field: "is_show", width: 200,  title: "是否显示", type: "select", sear: "is_show",enum: {0:"未显示",1:"以显示"}},
+                        {field: "is_read", width: 200, title: "是否读过", type: "select", sear: "is_read",enum: {0:"未读",1:"已读"}},
+                        {field: "reply_id", width: 150, title: "回复人的ID", type: "", sear: "reply_id"},
+                        {field: "remark", width: 150, title: "备注", type: "", sear: "remark"},
+                        {field: "create_at", width: 150,  title: "创建时间", type: "time", sear: "create_at"},
+                        {field: "update_at", width: 150,  title: "更新时间", type: "time", sear: "update_at"},
+                        {field: "right", width: 120, title: "操作", toolbar: $('#barDemo'), align: "left", fixed: 'right'}
+                    ],
+                    reader: {
+                        elem: "#tabel_user",
+                        url: "/admin/pm/Api_guestbook/grid ",
+                        method: "post",
+                        id: 'tabel_user',
+                        where: {
+                            filter: ""
+                        },
+                    },
+                    autoCol: true, //自定义列表,
+                    tool: {
+                        id: "id", //该行id字段名
+                        //是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+                        Event: [{type: "edit",url: '{{base_url}}admin/currency/edit_guestbook?id='},
+                            {type: "detail", url: '{{base_url}}admin/currency/info_guestbook?id='},
+                            {type: "del", url: '/admin/pm/Api_guestbook/delete'}
+                        ]
+                    },
+                    topBtnActive: {
+                        Event: [
+                        	{type: "plDel",url: '/admin/pm/Api_guestbook/delete'},
+                            {type: "improt", url: "/upload"},
+                            {type: "export", url: "/upload"}
+                        ]
+                    }
+                });
+            });
+
+        }
+    });
+</script>
+</body>
+
+</html>
+
+

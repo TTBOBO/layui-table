@@ -1,0 +1,49 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 700px; padding-bottom: 30px;">
+</form>
+<script>
+
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [
+				{type: "text",name: "服务名称",field: "um_company_service.name"},
+					{type: "",name: "大类ID",field: "um_company_service.cate_id",sOption: {0: "专业企服",1: "技孵宝",2: "i培训",3: "i传媒",4: "场地企服"}},
+					{type: "text",name: "行业ID",field: "um_company_service.industry_id"},
+					{type: "text",name: "服务类型",field: "um_company_service.type",sOption: {0: "未知",1: "专业培训",2: "IT服务",3: "视觉设计",4: "政策解读",5:"法律服务"}},
+					{type:"text",name:'类型细分',field:'um_company_service.child_type',sOption: {0: "未知",1: "企业培训",2: "创业培训",3: "融资培训"}},
+					{type:'text',name:'城市ID',field:'um_company_service.city_ids'},
+					{type:'text',name:'卖点标签',field:'um_company_service.sell_label'},
+					{type:'text',name:'服务承诺标签',field:'um_company_service.promise_label'},
+					{type:'text',name:'访问量',field:'um_company_service.uv'},
+					{type:'text',name:'价格',field:'um_company_service.price'},
+					{type:'text',name:'收藏量',field:'um_company_service.collect_num'},
+					{type:'text',name:'产品介绍',field:'um_company_service.introduce'},
+					{type:'time',name:'创建时间',field:'um_company_service.create_at'},
+					{type:'text',name:'公司ID',field:'um_company.company_id',url:"/admin/api_company_service/grid",colKey:"id",colName:"um_company.company_id"}
+				],
+				selectKey:"um_company.company_id",   //列字段id   例: id, product_id
+				infoUrl:"/admin/api_company_service/info",   //编辑详情接口
+				addEditUrl:'/admin/api_company_service/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/user/company_service'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>

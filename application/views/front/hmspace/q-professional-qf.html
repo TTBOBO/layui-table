@@ -1,0 +1,509 @@
+{% include 'front/q_header.html' %}
+
+  	<div class="qi-banner cur-banner">
+		<div id="slideBox" class="slideBox"  style="margin-bottom: 0;">
+			<div class="hd">
+				<ul><li></li><li></li><li></li></ul>
+			</div>
+			<div class="bd">
+				<ul>
+				{% for index, banner in banner.data.rows %}
+					<li><img src="{{banner.img}}" /></li>	<!-- ../resource/home/images/banner.jpg -->
+				{% endfor %}
+				</ul>
+			</div>
+			<!-- <a class="prev" href="javascript:void(0)"></a>
+			<a class="next" href="javascript:void(0)"></a> -->
+		</div>
+	</div>
+
+	<div class="qi-recommend">
+		<div class="newtainer">
+			<div class="fir-icon">
+				<img src="../resource/home/images/commend.png" alt="">
+				<p>优选推荐</p>
+			</div>
+			<div class="item i1">
+				<a href="">
+					<img src="../resource/home/images/1633.png" alt="">
+					<span>品牌基础</span>
+				</a>
+			</div>
+			<div class="item i2">
+				<a href="">
+					<img src="../resource/home/images/1634.png" alt="">
+					<span>企业培训</span>
+				</a>
+			</div>
+			<div class="item i3">
+				<a href="">
+					<img src="../resource/home/images/1635.png" alt="">
+					<span>网站建设</span>
+				</a>
+			</div>
+			<div class="item i4">
+				<a href="">
+					<img src="../resource/home/images/1636.png" alt="">
+					<span>营销策划</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="htr-main newtainer jgtj qi-pq">
+		<div class="icurtit bt20-" style="margin-bottom: 0;border-left: 0;">
+			<a href="#" class="more">查看全部 ></a>
+		</div>
+		<div class="leftitle"><img src="../resource/home/images/leftitle1.png" alt="">专业培训</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">灵狐传媒</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons">star</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">奥米亚科技</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons sbd">star_border</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">AspireBoard</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons sbd">star_border</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">AspireBoard</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons sbd">star_border</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">AspireBoard</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons sbd">star_border</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">AspireBoard</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons sbd">star_border</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="htr-main newtainer jgtj qi-pq">
+		<div class="icurtit bt20-" style="margin-bottom: 0;border-left: 0;">
+			<a href="#" class="more">查看全部 ></a>
+		</div>
+		<div class="leftitle"><img src="../resource/home/images/leftitle2.png" alt=""><span>IT</span>服务</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">灵狐传媒</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons">star</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="htr-main newtainer jgtj qi-pq">
+		<div class="icurtit bt20-" style="margin-bottom: 0;border-left: 0;">
+			<a href="#" class="more">查看全部 ></a>
+		</div>
+		<div class="leftitle"><img src="../resource/home/images/leftitle3.png" alt="">法律服务</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">灵狐传媒</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons">star</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="htr-main newtainer jgtj qi-pq">
+		<div class="icurtit bt20-" style="margin-bottom: 0;border-left: 0;">
+			<a href="#" class="more">查看全部 ></a>
+		</div>
+		<div class="leftitle"><img src="../resource/home/images/leftitle4.png" alt="">政策管理</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">灵狐传媒</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons">star</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="htr-main newtainer jgtj qi-pq">
+		<div class="icurtit bt20-" style="margin-bottom: 0;border-left: 0;">
+			<a href="#" class="more">查看全部 ></a>
+		</div>
+		<div class="leftitle"><img src="../resource/home/images/leftitle5.png" alt="">管理咨询</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">灵狐传媒</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons">star</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="htr-main newtainer jgtj qi-pq">
+		<div class="icurtit bt20-" style="margin-bottom: 0;border-left: 0;">
+			<a href="#" class="more">查看全部 ></a>
+		</div>
+		<div class="leftitle"><img src="../resource/home/images/leftitle6.png" alt="">品牌策划</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="htr-card hti-card">
+					<div class="htiin-">
+						<img src="../resource/home/images/linghu.png" alt="">
+						<p class="htr-card-name">灵狐传媒</p>
+						<ul class="htr-card-ul">
+							<li>资源</li>
+							<li>技术</li>
+							<li>效率</li>
+						</ul>
+						<i class="material-icons">star</i>
+						<div class="bt-deta">
+							<div><i class="material-icons">location_on</i>深圳</div>
+							<div><i class="material-icons">remove_red_eye</i>259810</div>
+						</div>
+					</div>
+					<div class="hti-card-wmb">
+						<div class="wx-dfx">
+							<p>完成质量</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>服务态度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="wx-dfx">
+							<p>工作速度</p>
+							<div class="rateYo"></div><div class="counter">4.7</div><span>分</span>
+						</div>
+						<div class="hti-card-xmb"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="rightfix">
+		<div class="online">
+			<a href="javascript:;"><img src="../resource/home/images/online.png" alt="">在线咨询</a>
+		</div>
+		<div class="fixmenu">
+			<ul>
+				<li><a href="javascript:;"><img src="../resource/home/images/trolley.png" alt=""></a></li>
+				<li><a href="javascript:;"><img src="../resource/home/images/phone.png" alt=""></a></li>
+				<li><a href="javascript:;"><img src="../resource/home/images/weixin.png" alt=""></a></li>
+				<li><a href="javascript:;"><img src="../resource/home/images/weibo.png" alt=""></a></li>
+			</ul>
+		</div>
+	</div>
+	{% include 'front/footer.html' %}
+	
+	<script src="../resource/home/js/jquery-1.11.3.min.js"></script>
+	<script src="../resource/home/js/bootstrap.min.js"></script>
+	<script src="../resource/home/js/jquery.SuperSlide.js"></script>
+	<link href="../resource/home/js/rateyo/jquery.rateyo.min.css" rel="stylesheet">
+	<script src="../resource/home/js/rateyo/jquery.rateyo.min.js"></script>
+	<script>
+		jQuery(".slideBox").slide({mainCell:".bd ul",effect:"left",autoPlay:true,delayTime:1000});
+	</script>
+	<script>
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip();
+		  $(".rateYo").rateYo({
+		    rating: 4.7,
+		    precision: 2,
+		    starWidth: "16px",
+		    spacing: "3px",
+		    readOnly: true,
+		    onChange: function (rating, rateYoInstance) {
+				$(this).next().text(rating);
+		    }
+		  });
+		});
+	</script>
+</body>
+</html>

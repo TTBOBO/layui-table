@@ -1,0 +1,114 @@
+{% include 'admin/iheader.html' %} {% include 'admin/crumbs.html' %}
+<div class="layui-form">
+	<div class="layui-form-item">
+		
+		<div class="layui-inline">
+			<div class="layui-input-inline" id="select">
+				
+			</div>
+			<label class="layui-form-label">日期范围</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" id="time" placeholder=" - ">
+			</div>
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal" id="search">搜索</button>
+	</div>
+</div>
+<div id="test" style="width: 800px; height: 500px;">
+
+</div>
+
+<div id="test1" style="width: 500px; height: 400px;">
+
+</div>
+
+<div id="test2" style="width: 500px; height: 400px;">
+
+</div>
+<script src="/resource/admin/js/jslib/echarts.min.js"></script>
+<script>
+	ykp.defineClass(['element', "jquery", 'laytpl'], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initPage();
+		},
+		initPage: function() {
+			hm.load(function(optionObj) {
+				var form = optionObj.form,
+					layer = optionObj.layer,
+					layedit = optionObj.layedit,
+					laydate = optionObj.laydate,
+					public = optionObj.public,
+					upload = optionObj.upload;
+				public.dataRender([{
+					el: "#time",
+					range: true
+				}]);
+				
+				public.showTimeSelect({
+					el:"#select",
+					data:[{val:1,title:"昨天"},
+						{val:7,title:"近一周"},
+						{val:30,title:"近一个月"},
+						{val:90,title:"近三个月"}
+					],
+					fun:change
+				})
+				
+				function change(val){
+					console.log(hm.timeForMat(val));
+				}
+				hm.getLineChart({
+					el: 'test',
+					data: 1
+				})
+				//			ykp.doAjax({
+				//				url: "",
+				//				method: "post",
+				//				data: {},
+				//				success: function(res) {
+				//			
+				//				}
+				//			})
+
+				hm.getCircularChart({
+					el: 'test1',
+					data: 1
+				})
+
+			})
+
+			$('#search').click(function() {
+				var time = $('#time').val();
+				if(!time) {
+					layer.msg("请选择时间再搜索");
+					return false;
+				}
+				var filter = time.split(' - ');
+				return false;
+				getDate(filter);
+
+			})
+
+			function getDate(option) {
+				ykp.doAjax({
+					url: "",
+					method: "post",
+					data: {
+						start: option[0],
+						end: option[1]
+					},
+					success: function(res) {
+
+					}
+				})
+			}
+
+		},
+
+	});
+</script>
+</body>
+
+</html>

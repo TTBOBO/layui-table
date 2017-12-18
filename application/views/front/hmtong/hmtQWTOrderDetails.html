@@ -1,0 +1,101 @@
+{% include 'front/header.html' %}
+<link rel="stylesheet" href="/resource/front/css/hmtHome.css" />
+<link rel="stylesheet" type="text/css" href="/resource/front/css/css.css" />
+
+
+
+<div style="width:1200px; margin:0 auto; height:auto;margin-top:127px;">
+    <div class="ddt">海脉通 > 全网通 > 订单详情</div>
+    
+    <div class="czcp">
+    	<div>订单号:&nbsp;&nbsp;{{content['order_num']}}</div>
+        <div>订单状态：<span>{{content['order_state']}}</span></div>
+        <div>下单时间：{{content['order_time']}}</div>
+    </div>
+    
+    <div class="czcp1">
+    	<div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">会员卡类型：</div>
+            <div class="ddt6" style="font-size:14px;font-weight:bold;">{{content['card_type']}}</div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">服务城市：</div>
+            <div class="ddt6" style="font-size:14px;">
+                {% for key,item in content['city'] %}
+                <li>
+                    <p>{{item}}</p>
+                </li>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">服务年限：</div>
+            <div class="ddt6" style="font-size:14px;">{{content['term']}}</div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">服务起止：</div>
+            <div class="ddt6" style="font-size:14px;">
+            	{{content['begin']}} — {{content['end']}}
+            </div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">服务内容：</div>
+            <div class="ddt6" style="font-size:14px;">{{content['fwnr']}}</div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">赠送项目：</div>
+            <div class="ddt6" style="font-size:14px;">
+
+            </div>
+        </div>
+        
+        <div class="ddt10">
+            {% for key,item in content['give'] %}
+            <div class="ddt11">{{item['name']}}<span style="float:right;"><span style="font-weight:bold;color:#ff6600; font-size:18px;">{{item['num']}}</span> {{item['company']}}</span></div>
+            {% endfor %}
+        </div>
+        
+        
+        
+    </div>
+    <div class="czcp2">
+    	<div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">套餐费用：</div>
+            <div class="ddt6" style="font-size:14px;"><span style="color:#ff6600;">¥{{content['cost']}}</span></div>
+        </div>
+        <div class="ddt4" style="width:1200px ;height: 60px;">
+            <div class="ddt5" style="font-size:14px;">支付方式：</div>
+            <div class="ddt6" style="font-size:14px;"></div>
+        </div>
+        <div class="czcp3">
+            {% for key,item in content['pay_type'] %}
+            <li>
+                <div><img src="{{item}}" /></div>
+            </li>
+            {% endfor %}
+
+        </div>
+       <!-- <div class="ddt4">
+            
+            <div class="ddt6" style="font-size:14px;">{{content['tip']}}</div>
+        </div>-->
+		<div class="czcp4"><div><img src="images/a1_11.png" /></div>我已阅读《<a href="#">全网通会员卡使用说明</a>》并同意《<a href="#">全网通会员卡购买及使用协议</a>》</div>
+        <div class="ddt7">立即支付</div>
+        
+    </div>
+
+
+
+
+
+
+
+
+ </div>
+
+
+
+
+
+
+{% include 'front/footer.html' %}

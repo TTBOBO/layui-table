@@ -1,0 +1,72 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '渠道名称',val: 'im_channel.name'},
+						{name: '渠道类型',val: 'im_channel_cate.id',select:'true'},
+						{name: '行业名称',val: 'pm_industry.id'},
+						{name: '城市名称',val: 'pm_regions.id'},
+						{name: 'logo图片',val: 'im_channel.logo',type:'img'},
+						{name: '描述',val: 'im_channel.description'},
+						{name: '特色信息',val: 'im_channel.special_info'},
+						{name: '推荐理由',val: 'im_channel.recommend_reason'},
+						{name: '主体内容',val: 'im_channel.content'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/im/Api_channel/info',
+					method: "post",
+					data: {
+						filter :"im_channel.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "im_channel_cate.id",
+								val: ['代理服务商', '项目招商','招商外包','供应链','媒介','展会']
+							}]
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+
+
+
+

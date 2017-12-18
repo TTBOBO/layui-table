@@ -1,0 +1,49 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 720px; padding-bottom: 30px;"></form>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [
+					{type: "text",name: "赠送项目名称",verify:"required",field: "name"},
+					{type: "text",name: "赠送项目值",verify:"pInt", field: "num"},
+					{type: "select",name: "数量单位",verify:"required",field: "num_unit",sOption: {0: "张",1: "小时"}},
+					{type: "select",name: "赠送类型",verify:"required",field: "type",sOption: {0: "纯文本",1: "参数计划"}},
+					{type: "text",name: "价格",verify:"pInt",field: "price"},
+					//{type: "checkbox",name: "服务类型",field: "um_provider.invest_type", url:"http://www.my-haimai.com/admin/api_user",colKey:"uid",colName:"username"},  //异步获取数据的时候
+					{type: "time",name: "创建时间",verify:"required",field: "create_at"},
+					{type: "select",name: "产品类型",verify:"required",field: "product_type_id",sOption: {1: "虚拟",2: "实体",3:"长租"}},
+				],
+				lw:100,
+				selectKey:"",   //列字段id   例: id, product_id
+				verifyData:{
+					option: [{
+						verifyDate: "pInt"
+					}],
+					el: ".layui-form"
+				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"",   //编辑详情接口
+				addEditUrl:'/admin/api_presend_item/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/product/presend_item'   //添加成功返回的页面
+			});
+			
+			
+		},
+	});
+</script>
+</body>
+</html>

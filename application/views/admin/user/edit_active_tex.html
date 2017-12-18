@@ -1,0 +1,64 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 700px; padding-bottom: 30px;">
+</form>
+<script>
+
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [{type: "text",name: "id",verify:"",display:true,field: "id"},
+					{type: "text",name: "用户名称",field: "um_program.uid"},
+					{type: "select",name: "公司名称",field: "um_program.company_id",sOption: {0: "个人项目",1: "公司项目"}},
+					{type: "text",name: "项目名称",field: "um_program.name"},
+					{type: "upload",name: "项目主图",field: "um_program.thumb"},
+					{type:"upload",name:'项目图片',field:'um_program.pics'},
+					{type:'text',name:'项目简介',field:'um_program.descrption'},
+					{type:'text',name:'项目内容',field:'um_program.content'},
+					{type:'time',name:'创建时间',field:'um_program.create_at'},
+					{type:'text',name:'城市ID',field:'um_program.city_ids'},
+					{type:'text',name:'项目金额',field:'um_program.need_amount'},
+					{type:'text',name:'所在股份',field:'um_program.take_shares'},
+					{type:'select',name:'融资阶段',field:'um_program.programe_cate_id',sOption: {1: "种子轮",2:"天使轮",3:"P-A",4:"A轮",5:"A+轮",6:"B+轮",7:"C轮",8:"D轮",9:"E轮"}},
+					{type:'text',name:'平台行业名称',field:'um_program.platform_name'},
+					{type:'select',name:'平台状态',field:'um_program.platform_status',sOption: {0: "运营中",1: "已停运"}},
+					{type:'select',name:'推荐项目',field:'um_program.recommend',sOption: {0: "否",1: "推荐"}},
+					{type:'text',name:'行业ID',field:'um_program.industry_id'},
+					{type:'text',name:'状态',field:'um_program.status'}
+				],
+				selectKey:"um_program.id",   //列字段id   例: id, product_id
+//				verifyData:{
+//					option: [{
+//						verifyDate: "password"
+//					}, {
+//						verifyDate: "tel"
+//					},{
+//						verifyDate: "test",
+//						match:[/\d+\.\d+\.\d+\.\d+ /, '请填写正确的ip']
+//					}],
+//					el: ".layui-form"
+//				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"/admin/Api_program/info",   //编辑详情接口
+				addEditUrl:'/admin/Api_program/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/user/active_tex'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>
+

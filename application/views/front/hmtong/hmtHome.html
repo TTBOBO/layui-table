@@ -1,0 +1,56 @@
+{% include 'front/header.html' %}
+<link rel="stylesheet" href="/resource/front/css/hmtHome.css" />
+<link rel="stylesheet" type="text/css" href="/resource/front/css/css.css" />
+
+<div id="container">
+	{% include 'front/common/hmtbanner.html' %}
+	<div class="contbox" >
+		<div class="mnav">
+			<ul class="placeItem">
+				<li class="act">
+					<div><span>01</span></div>
+					<p>虚拟办公会员服务产品</p>
+				</li>
+				<li>
+					<div><span>02</span></div>
+					<p>实体储值会员服务产品</p>
+				</li>
+				<li >
+					<div><span>03</span></div>
+					<p>场地实体长租服务产品</p>
+				</li>
+			</ul>
+		</div>
+		{% include 'front/hmtong/hmtvirtual-vip.html' %}
+		{% include 'front/hmtong/hmtentity-vip.html' %}
+		{% include 'front/hmtong/place-longrent.html' %}
+	</div>
+</div>
+{% include 'front/footer.html' %}
+<script>
+	$(function() {
+
+	    $('.placeItem li').click(function () {
+	        $(this).addClass('act').siblings().removeClass('act');
+			var index = $(this).index();
+
+			if(index == 0){
+               $('.virtual-vip').show();
+               $('.entity-vip').hide();
+               $('.place-longrent').hide();
+            }
+
+            if(index == 1){
+                $('.virtual-vip').hide();
+                $('.entity-vip').show();
+                $('.place-longrent').hide();
+            }
+
+            if(index == 2){
+                $('.virtual-vip').hide();
+                $('.entity-vip').hide();
+                $('.place-longrent').show();
+            }
+        })
+    })
+</script>

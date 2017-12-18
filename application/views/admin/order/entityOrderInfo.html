@@ -1,0 +1,73 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+					col: [{name: '订单号',val: 'om_entity_order.code'},
+						{name: '源订单号', val: 'om_entity_order.scode'},
+						{name: '订单金额',val: 'om_entity_order.price'},
+						{name: '用户名',val: 'um_user.username'},
+						{name: '订单状态',val: 'om_entity_order.status',select:true},
+						{name: '支付方式',val: 'om_entity_order.pay_type',select:true},
+						{name: '产品id',val: 'om_entity_order.product_id'},
+						{name: 'IP地址',val: 'om_entity_order.ip'},
+						{name: '支付时间',val: 'om_entity_order.pay_time'},
+//						{name: '创建人',val: 'um_user.username'},
+						{name: '服务开始时间',val: 'om_entity_order.service_start',w:300},
+						{name: '服务结束时间',val: 'om_entity_order.service_end',w:300},
+						{name: '创建时间',val: 'om_entity_order.create_at',w:'300'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/api_entity_order/info',
+					method: "post",
+					data: {
+						filter : "om_entity_order.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "om_entity_order.status",
+								val: ['未付款', '已付款']
+							}, {
+								name: "om_entity_order.pay_type",
+								val: ['微信','支付宝', '对公转账']
+							}]
+						}); //展示详情   具体实现方法请查看public.js
+					}
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>

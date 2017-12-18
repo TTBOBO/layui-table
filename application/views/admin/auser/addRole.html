@@ -1,0 +1,106 @@
+{% include 'admin/iheader.html' %}
+<style>
+
+</style>
+{% include 'admin/crumbs1.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<link rel="stylesheet" href="/resource/admin/ztree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+
+<script type="text/javascript" src="/resource/admin/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/resource/admin/ztree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/resource/admin/ztree/js/jquery.ztree.exedit.js"></script>
+<form style="padding-bottom: 100px;">
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" lay-verify="" id="name" autocomplete="off" placeholder="请输入名称"
+                   class="layui-input">
+        </div>
+    </div>
+    <ul id="treeDemo" class="ztree" style="padding-left: 100px;"></ul>
+    <button class="layui-btn btn" type="button" style="margin-left: 100px;">保存</button>
+</form>
+
+
+<script>
+    ykp.defineClass(['element', "jquery", 'laytpl'], {
+        init: function () {
+            var it = this;
+            //初始化列表
+            it.initrole();
+        },
+        //初始化列表
+        initrole: function () {
+            var it = this;
+            hm.load(function (option) {
+                var form = option.form;
+                var public = option.public;
+                var setting = {
+                    treeId: 'tree',
+                    view: {
+                        selectedMulti: false,
+                        showIcon: true
+                    },
+                    check: {
+                        enable: true
+                    },
+                    data: {
+                        simpleData: {
+                            enable: true,
+                            idKey: 'id',
+                            pIdKey: 'parent_id',
+                            rootPId: 0
+                        },
+                        key: {
+                            name: 'title'
+                        },
+                    },
+                    edit: {
+                        enable: false
+                    },
+                };
+                var str = hm.htmlDecodeByRegExp("{{nodes}}");
+                var zNodes = JSON.parse(str);
+
+                $(document).ready(function () {
+                    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                });
+
+                $('.btn').click(function () {
+                    var name = $('#name').val();
+                    if (!name) {
+                        layer.msg('请输入名称');
+                        return false;
+                    }
+                    var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+                    var checked = treeObj.getCheckedNodes(true);
+                    var nodes = hm.getNodesId(checked);
+                    if (!nodes) {
+                        //提示请选择节点
+                        layer.msg('请选中权限');
+                        return;
+                    }
+                    var data = {
+                        name: name,
+                        permission: nodes
+                    };
+                    var parmas = ykp.getSessionStorage('iframeId');
+                    //调用新增接口
+                    ykp.doAjax({
+                        url: "/admin/api_role/add_or_edit",
+                        method: "post",
+                        data: data,
+                        success: function (res) {
+                        	layer.msg('添加成功');
+                            self.parent.document.getElementById(parmas).src = "{{base_url}}/admin/auser/role";
+                        }
+                    })
+                });
+            })
+        },
+    });
+</script>
+</body>
+
+</html>

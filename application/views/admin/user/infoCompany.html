@@ -1,0 +1,71 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [{name: '用户ID',val: 'uid'},
+						{name: '公司名称',val: 'company_name',w:'300'},
+						{name: '企业logo',val: 'logo'},
+						{name: '公司网址',val: 'website'},
+						{name: '公司QQ',val: 'qq'},
+						{name: '公司地址--省',val: 'prov'},
+						{name: '公司地址--市',val: 'city'},
+						{name: '公司地址---区',val: 'dist'},
+						{name: '公司地址---街道',val: 'street'},
+						{name: '营业执照图片',val: 'business_license',w:'500'},
+						{name: '公司法人名称',val: 'legal_person'},
+						{name: '企业信用代码',val: 'credit_code'},
+						{name: '联系座机',val: 'tel'},
+						{name: '联系手机',val: 'mobile'},
+						{name: '企业子帐号ID',val: 'alt_id'},
+						{name: '企业项目ID',val: 'program_ids'},
+						{name: '企业合同ID',val: 'contract_ids'},
+						{name: '创建时间',val: 'create_at',w:'300'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/api_company/info',
+					method: "post",
+					data: {
+						filter : "um_company.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>

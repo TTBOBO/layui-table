@@ -1,0 +1,75 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [{name: '产品ID',val: 'id'},
+						{name: '产品名称',val: 'name'},
+						{name: '产品描述',val: 'description'},
+						{name: '产品主图',val: 'thumb',type:"img"},
+						{name: '图片地址',val: 'pics',type:"img"},
+						{name: '产品宣传语',val: 'product_intro',w:'300'},
+						{name: '服务列表id',val: 'service_list'},
+						{name: '赠送项目',val: 'presend_items'},
+						{name: '价格',val: 'price'},
+						{name: '套餐对应的价格',val: 'meal_items',w:'300'},
+						{name: '是否单套餐',val: 'is_single_price',select:'true'},
+						{name: '服务城市',val: 'service_city'},
+						{name: '服务年限',val: 'service_limit'},
+						{name: '保底押金',val: 'is_keep_price'},
+						{name: '折扣',val: 'discount_point'},
+						{name: '创建时间',val: 'create_at',w:'300'}
+					]
+				})
+
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/Api_entity_product/info',
+					method: "post",
+					data: {
+						filter : "im_entity_product.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "is_single_price",
+								val: ['单套餐', '多套餐']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+

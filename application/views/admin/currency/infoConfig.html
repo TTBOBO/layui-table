@@ -1,0 +1,72 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '优惠券名称',val: 'name'},
+						{name: '优惠券金额',val: 'amount'},
+						{name: '优惠券有效期开始时间',val: 'start_time',w:'500'},
+						{name: '优惠券有效期结束时间',val: 'end_time',w:'500'},
+						{name: '产品的源id',val: 'sid'},
+						{name: '分类id',val: 'cateid'},
+						{name: '标签',val: 'tag'},
+						{name: '优惠券类型',val: 'type',select:'true'},
+						{name: '订单满多少钱可以使用该优惠券',val: 'limit_amount',w:'500'},
+						{name: '生成了多少个优惠券',val: 'gen_num'},
+						{name: '创建人ID',val: 'creator_id'},
+						{name: '创建时间',val: 'create_at',w:'300'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '{{base_url}}/admin/pm/Api_coupon_config/info',
+					method: "post",
+					data: {
+						filter : ""
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "type",
+								val: ['无条件', '1满多少钱可以使用该优惠券']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+

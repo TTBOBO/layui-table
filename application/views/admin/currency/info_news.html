@@ -1,0 +1,81 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '标题',val: 'title'},
+						{name: '副标题',val: 'ctitle'},
+						{name: '标题图片',val: 'titlepic'},
+						{name: '关键字',val: 'keywords',w:300},
+						{name: '阅读量',val: 'read_num',w:300},
+						{name: '点赞量',val: 'laud_num',w:300},
+						{name: '分享量',val: 'share_num',w:300},
+						{name: '描述',val: 'description',w:300},
+						{name: '内容',val: 'content',w:300},
+						{name: '分类ID',val: 'cate_id',w:300,select:true},
+						{name: '是否显示',val: 'is_show',w:300,select:true},
+						{name: '是否推荐',val: 'is_recommend',w:300,select:true},
+						{name: '排序',val: 'sort',w:300},
+						{name: '备注',val: 'remark',w:300},
+						{name: '创建人ID',val: 'creator',w:300},
+						{name: '创建时间',val: 'create_at',w:300},
+						{name: '更新时间',val: 'update_at',w:300},
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/pm/Api_news/info',
+					method: "post",
+					data: {
+						filter : "id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,statuArr: [{
+								name: "cate_id",
+								val: ['','公司新闻', '行业新闻', '商机动态', '投资百科', '融资百科', '资金百科', '担保百科']
+							},{
+								name: "is_show",
+								val: ['不显示', '显示']
+							},,{
+								name: "is_recommend",
+								val: ['不推荐', '推荐']
+							}]
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+

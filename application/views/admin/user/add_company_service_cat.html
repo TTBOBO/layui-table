@@ -1,0 +1,53 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 700px; padding-bottom: 30px;">
+</form>
+<script>
+
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [
+				{type: "text",name: "父类ID",field: "parent_id",verify:"pInt"},
+					{type: "time",name: "创建时间",field: "create_at"}
+				],
+				/*{field: "uid",width: 80,title: "用户ID",type: "",sear: "um_company.uid"},
+					
+						{field: "legal_person",width: 150,title: "公司法人名称",type: "",sear: "um_company.legal_person"},
+						{field: "credit_code",width: 150,title: "企业信用代码",type: "",sear: "um_company.credit_code"},
+						{field: "tel",width: 120,title: "联系座机",type: "",sear: "um_company.tel"},
+						{field: "mobile",width: 120,title: "联系手机",type: "",sear: "um_company.mobile"},
+						{field: "alt_id",width: 120,title: "企业子账号ID",type: "",sear: "um_company.alt_id"},
+						{field: "program_ids",width: 120,title: "企业项目ID",type: "",sear: "um_company.program_ids"},
+						{field: "contract_ids",width: 120,title: "企业合同ID",type: "",sear: "um_company.contract_ids"},
+						{field: "create_at",width: 150,title: "创建时间",type: "time",sear: "um_company.create_at"},*/
+				selectKey:"",   //列字段id   例: id, product_id
+				verifyData:{
+					option: [{
+						verifyDate: "pInt"
+					}],
+					el: ".layui-form"
+				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"/admin/api_company_service_cate/info",   //编辑详情接口
+				addEditUrl:'/admin/api_company_service_cate/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/user/company_service_cat'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>

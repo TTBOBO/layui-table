@@ -1,0 +1,64 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 720px; padding-bottom: 30px;">
+</form>
+<script src="/resource/admin/js/jslib/citys.js"></script>
+<!--<script src="/resource/admin/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>-->
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [{type: "text",name: "id",display:true, field: "id"},
+					{type: "text",name: "姓名",field: "name",verify:"required"},
+					{type: "upload",name: "头像",field: "avatar",verify:"required"},
+					{type: "text",name: "职位称呼",field: "job_title",verify:""},
+					{type: "select",name: "公司名称",field: "company_name",verify:"",url:"/admin/am/Api_contacts_dynamics/grid",colKey:"id",colName:'company_name'},
+					{type: "text",name: "手机号",field: "mobile",verify:"tel"},
+					{type: "text",name: "联系电话",field: "phone",verify:""},
+					{type: "text",name: "电子邮箱",field: "email",verify:"email"},
+					{type: "text",name: "QQ号码",field: "qq",verify:"qq"},
+					{type: "text",name: "微信号",field: "weixin",verify:"required"},
+					{type: "text",name: "地址",field: "addr",verify:""},
+					{type: "time",name: "创建时间",field: "create_at",verify:""}
+				],
+				selectKey:"id",   //列字段id   例: id, product_id
+				verifyData:{
+					option: [
+						{verifyDate: "china"},
+						{verifyDate: "tel"},
+						{verifyDate: "email"},
+						{verifyDate: "qq"},
+					],
+					el: ".layui-form"
+				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"/admin/am/Api_contacts_dynamics/info",   //编辑详情接口
+				addEditUrl:'/admin/am/Api_contacts_dynamics/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/auser/dynamic'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

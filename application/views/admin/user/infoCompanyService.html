@@ -1,0 +1,76 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [{name: '服务名称',val: 'um_company_service.name'},
+						{name: '大类ID',val: 'um_company_service.cate_id',select:true},
+						{name: '行业ID',val: 'um_company_service.industry_id'},
+						{name: '服务类型',val: 'um_company_service.type',select:true},
+						{name: '类型细分',val: 'um_company_service.child_type',select:true},
+						{name: '卖点标签',val: 'um_company_service.sell_label'},
+						{name: '服务承诺标签',val: 'um_company_service.promise_label'},
+						{name: '访问量',val: 'um_company_service.uv'},
+						{name: '价格',val: 'um_company_service.price'},
+						{name: '收藏量',val: 'um_company_service.collect_num'},
+						{name: '产品介绍',val: 'um_company_service.introduce'},
+						{name: '创建时间',val: 'um_company_service.create_at',w:'300'},
+						{name: '公司ID',val: 'um_company.company_name',w:'300'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '{{base_url}}admin/api_company_service/info',
+					method: "post",
+					data: {
+						filter : "um_company_service.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "um_company_service.cate_id",
+								val: ['专业企服', '技孵宝', 'i培训', 'i传媒', '场地企服']
+							}, {
+								name: "um_company_service.type",
+								val: ['未知', '专业培训', 'IT服务', '视觉设计', '政策解读', '法律服务']
+							},{
+								name: "um_company_service.child_type",
+								val: ['未知', '企业培训', '创业培训', '融资培训']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>

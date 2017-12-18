@@ -1,0 +1,82 @@
+{% include 'admin/iheader.html' %}
+{% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a> 
+	<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initTabel();
+		},
+		initTabel: function() {
+			hm.load(function(option) {
+				var table = option.table;
+				var public = option.public;
+				public.showTable({
+					topTool: {
+						btnArr: [
+						{title: "添加",type: "add"},
+						{title: "高级搜索",type: "hSearch",},
+						{title: "批量删除",type: "plDel",class: "layui-btn-danger"},
+						{title: "导出",type: "export"}
+						]
+					},
+					cols: [{checkbox: true,},
+						{field: "id",width: 80,sort: true,title: "地址ID",type: "",sear: "um_addr.id"},
+						{field: "uid",width: 80,title: "用户id",type: "",sear: "um_addr.uid"},
+						{field: "receiver",width: 80,title: "收货人",type: "",sear: "um_addr.receiver"},
+						{field: "mobile",width: 120,title: "手机号码1",type: "",sear: "um_addr.mobile"},
+						{field: "mobile2",width: 120,title: "手机号码2",type: "",sear: "um_addr.mobile2"},
+						{field: "mobile3",width: 120,title: "手机号码3",type: "",sear: "um_addr.mobile3"},
+						{field: "tel",width: 120,title: "座机",type: "",sear: "um_addr.tel"},
+						{field: "prov",width: 120,title: "省",type: "",sear: "um_addr.prov"},
+						{field: "city",width: 80,title: "市",type: "",sear: "um_addr.city"},
+						{field: "dist",width: 120,title: "县",type: "",sear: "um_addr.dist"},
+						{field: "street",width: 120,title: "街道",type: "",sear: "um_addr.street"},
+						{field: "default",width: 160,title: "是否为默认地址",type: "select",sear: "um_addr.default",enum: {0:"非默认",1:"默认"}},
+						{field: "create_at",sort: true,width: 120,title: "创建时间",type: "",sear: "um_addr.create_at"},
+						{field: "update_at",sort: true,width: 120,title: "更新时间",type: "",sear: "um_addr.update_at"},
+						{field: "right",width: 150,title: "操作",toolbar: ykp.$('#barDemo'),align: "center",fixed: 'right',}
+					],
+					reader: {
+						elem: "#tabel_user",
+						url: "{{base_url}}admin/api_user_addr/grid",
+						method: "post",
+						id: 'tabel_user',
+						where: {
+							filter: ""
+						}
+					},
+					autoCol: true, //自定义列表,
+					tool: {
+						id: "id",  //该行id字段名
+						//是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+						Event: [{type: "edit",url: '{{base_url}}admin/user/edit_addr?id='},
+							{type: "detail",url: '{{base_url}}admin/user/info_addr?id='},
+							{type: "del",url: '{{base_url}}admin/api_user_addr/delete'}
+						]
+					},
+					topBtnActive: {
+						Event: [{type: "add",url: '{{base_url}}admin/user/add_addr'},
+							{type: "plDel",url: '{{base_url}}admin/api_user_addr/delete'}, 
+							{type: "improt",url: "/upload"},
+							{type: "export",url: "/upload"}
+						]
+					}
+				});
+
+			});
+		
+		}
+	});
+</script>
+</body>
+
+</html>

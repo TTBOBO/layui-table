@@ -1,0 +1,168 @@
+{% include 'front/header.html' %}
+<link rel="stylesheet" href="/resource/front/css/hmtHome.css" />
+<link rel="stylesheet" type="text/css" href="/resource/front/css/css.css" />
+<script src="/resource/front/js/jquery.min.js"></script>
+<style>
+    @charset "utf-8";
+    * {
+        margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline;
+    }
+    table{border-collapse:collapse;border-spacing:0;}
+    .c-100 {
+        width: 100%;
+    }
+    .c-t-center {
+        text-align: center;
+    }
+    .mt30 {
+        margin-top: 30px;
+    }
+    .mb10 {
+        margin-bottom: 10px;
+    }
+    .ptb20 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .c-main {
+        width: 1000px;
+        margin: 0 auto;
+    }
+    /* table
+    -----------------------------------------------------------------------------*/
+    .tb th { padding:10px 5px;  background-color:#e5f5ff; line-height: 20px; color:#999; vertical-align: middle;}
+    .tb td { padding:10px 5px; line-height: 25px; background-color:#e5f5ff;  word-wrap: break-word; word-break:break-all; color:#666; vertical-align: middle;}
+    .tb th.small {padding:5px;}
+    .tb .hover td { background-color:#fafafa;}
+    .tb-n th , .tb-n td {border:0; background:none; vertical-align:middle; padding:10px; color:#666;}
+    tr.hover td {background-color:#fcfcfc}
+    .tb-s th {background-color: #F8F8F8; color: #333;  padding: 15px 10px; width: 120px;}
+    .tb-s td { padding: 15px 10px;}
+    .tb-skin1 th { position:relative; padding:5px; border-top: 0 none; border-bottom:0 none; background-color:#f4f5f6;}
+    .tb-skin1 th:before { content:''; position:absolute; right:-1px; top:5px; bottom:5px; display:block; width:1px; background-color:#ddd; font-size:0; z-index:1; }
+    .tb-skin1 th:last-child { overflow:hidden; *zoom:1; }
+    .tb-min th , .tb-min td {padding:1px 4px;}
+    th{text-align: center}
+
+
+</style>
+
+
+
+<div style="width:1180px; margin:0 auto; height:auto;">
+    <div class="ddt">海脉通 > 点点通 > 订单详情</div>
+
+    <div class="czcp">
+        <div>订单号：{{content['order_num']}}</div>
+        <div>订单状态：<span>{{content['order_state']}}</span></div>
+        <div>下单时间：{{content['order_time']}}</div>
+    </div>
+    
+    <div class="czcp1">
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">会员卡类型：</div>
+            <div class="ddt6" style="font-size:14px;font-weight:bold;">{{content['card_type']}}</div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">请选择发展城市：</div>
+            <div class="ddt6" style="font-size:14px;">
+                {% for key,item in content['city'] %}
+                <p>{{item}}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="ddt4" style="font-size:14px;">选购项目：</div>
+        <div style="float: left;width: 95%;">
+            <table id="process-demo-1" class="tb tb-b c-100 c-t-center">
+                <thead>
+                    <tr >
+                        <th>服务地点</th>
+                        <th>城市服务套餐价(元/年)</th>
+                        <th>起止服务时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key,item in content['choose'] %}
+                <tr>
+                    <td>{{item['addr']}}</td>
+                    <td><span style="font-weight:bold;color:#ff6600; font-size:18px;" class="cost">{{item['cost']}}</span></td>
+                    <td>{{item['begin']}}—{{item['end']}}</td>
+                    <td><a class="del_xgxm">删除</a></td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">服务内容：</div>
+            <div class="ddt6" style="font-size:14px;">{{content['fwnr']}}</div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">赠送项目：</div>
+            <div class="ddt6" style="font-size:14px;"></div>
+        </div>
+
+        <div class="ddt10">
+            {% for key,item in content['give'] %}
+            <div class="ddt11">{{item['name']}}<span style="float:right;"><span style="font-weight:bold;color:#ff6600; font-size:18px;">{{item['num']}}</span> {{item['company']}}</span></div>
+            {% endfor %}
+        </div>
+        
+        
+        
+    </div>
+    <div class="czcp2">
+    	<div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">套餐费用：</div>
+            <div class="ddt6" style="font-size:14px;"><span style="color:#ff6600;">￥10,000</span></div>
+        </div>
+        <div class="ddt4">
+            <div class="ddt5" style="font-size:14px;">支付方式：</div>
+            <div class="ddt6" style="font-size:14px;"></div>
+        </div>
+        <div class="czcp3">
+            {% for key,item in content['pay_type'] %}
+            <li>
+                <div><img src="{{item}}" /></div>
+            </li>
+            {% endfor %}
+        </div>
+        <div class="czcp4"><div><img src="images/a1_11.png" /></div>我已阅读《<a href="#">点点通会员卡使用说明</a>》并同意《<a href="#">点点通会员卡购买及使用协议</a>》</div>
+         <div class="ddt7">立即支付</div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+ </div>
+<script>
+    $(function () {
+        var cost =0;
+        $(".cost").each(function(){
+            cost = cost +$(this).text()*1
+        });
+        $("#cost").html(cost);
+    })
+    $(".del_xgxm").click(function () {
+        var cost =0;
+       $(this).parents('tr').remove()
+        $(".cost").each(function(){
+            cost = cost +$(this).text()*1
+        });
+        $("#cost").html(cost);
+    })
+</script>
+
+
+
+
+{% include 'front/footer.html' %}

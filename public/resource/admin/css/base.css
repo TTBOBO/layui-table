@@ -1,0 +1,32 @@
+*{font-family:'微软雅黑'}
+.layui-footer{position: fixed;bottom: 0;width: 100%;background-color: #E1E1E1;height: 30px;text-align: center;line-height: 30px;}
+
+
+/** 全局初始化样式 **/
+
+.sidebar-toggle-cont{height:40px;border-bottom: 1px solid #383838;cursor:pointer;}
+.toggle-icon{display:block !important;text-align:center;padding:12px 15px;}
+
+.sidebar-mini.sidebar-collapse .main-header .logo{width:500px;}
+.sidebar-mini.sidebar-collapse .main-header .logo>.logo-lg{display:block;}
+.sidebar-mini.sidebar-collapse .main-header .navbar,.main-header>.navbar{margin-left:0 !important;}
+.skin-blue .main-header .logo,.skin-blue .main-header .logo:hover{background: #3096D1;}
+.skin-blue .main-header .navbar{background:none;}
+.sidebar-mini.sidebar-collapse .main-header .logo>.logo-lg{display:block;}
+.main-sidebar, .left-side{width:200px !important;}
+.content-wrapper{margin-left:200px !important;}
+.content-wrapper .content-tabs{border-bottom:1px solid #d9d9d9 !important;}
+.content-wrapper .content-tabs .page-tabs a{border-right: solid 1px #ECECEC !important;}
+.content-wrapper .content-tabs .page-tabs a.active{background: #39BAD0 !important; border-right: solid 1px #8E9FB0 !important;}
+.content-wrapper .content-tabs{height:39.9px !important}
+
+.skin-blue .treeview-menu > li.active > a, .skin-blue .treeview-menu > li > a:hover{background:#f1a61d;border-radius: 40% 0 0 0;margin-left:-20px;padding-left:35px;}
+
+
+.defineBtn{height: 35px !important; line-height: 35px !important;}
+.layui-table-tool{padding: 4px 10px 0 0 !important;}
+.layui-form-select {width: 186px;}
+.layui-form-select dl dd {line-height: 28px !important;}
+
+
+

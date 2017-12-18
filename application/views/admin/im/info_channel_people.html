@@ -1,0 +1,79 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: 'ID',val: 'im_channel_people.id'},
+//						{name: '用户ID',val: 'uid'},
+						{name: '用户名',val: 'im_channel_people.username'},
+						{name: '头像',val: 'im_channel_people.avatar',type:"img"},
+						{name: '性别',val: 'im_channel_people.sex',select:true},
+						{name: '公司名称',val: 'im_channel_people.company_name'},
+						{name: '岗位',val: 'im_channel_people.position'},
+						{name: '城市ID',val: 'pm_regions.id'},
+						{name: '城市名称',val: 'pm_regions.name'},
+						{name: '标签',val: 'im_channel_people.label'},
+						{name: '是否显示',val: 'im_channel_people.is_show',select:true},
+						{name: '教育背景',val: 'im_channel_people.education_info'},
+						{name: '项目经验',val: 'im_channel_people.project_info'},
+						{name: '获奖情况',val: 'im_channel_people.haswin_info'},
+						{name: '工作经验',val: 'im_channel_people.work_info'},
+						{name: '创建时间',val: 'im_channel_people.create_at',w:300},
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/im/api_channel_people/info',
+					method: "post",
+					data: {
+						filter : "im_channel_people.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "im_channel_people.is_show",
+								val: ['不显示', '显示']
+							},{
+								name: "im_channel_people.sex",
+								val: ['未知', '男','女']
+							}]
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+

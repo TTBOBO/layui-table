@@ -1,0 +1,163 @@
+{% include 'front/header.html' %}
+<link rel="stylesheet" href="/resource/front/css/hmtHome.css" />
+<link rel="stylesheet" type="text/css" href="/resource/front/css/css.css" />
+<style>
+	#header{rgba(0,0,0,0.8)!important;color:#fff !important;}
+	{
+		background: #fff;
+		box-shadow: 0 1px 8px 4px #eee;
+	}
+	 .picture {
+    	width: 100%;
+    	height: 120px;
+    	margin-top: 60px;
+    	background: url(/resource/front/images/1203.png);
+    }
+    .picture p {
+    	  text-align: center;
+    	  padding:42px 240px;
+		  font-family: MicrosoftYaHei;
+		  font-size: 36px;
+		  line-height: 0.67;
+		  color: #343434;
+		  text-shadow: 0px 2px 9px #fff;
+    }
+     .procedure {
+    	display: flex;
+    	flex-direction: row;
+    	justify-content: center;
+    	width: 100%;
+    	height: 20px;
+    	margin-top:35px;
+    	margin-bottom: 136px;
+    }
+    .procedure p {
+    	width: 16.6%;
+    }
+    .ddt9 {
+    	text-align: center;
+    }
+</style>
+
+
+ <div style="width:1180px; margin:0 auto; height:auto;"> 
+    <div class="ddt">海脉通 > 神州通产品</div>
+     <div class="picture">
+    	<p>神州通-企业按需快速发展软着路的解决方案</p>
+    </div>
+    <div class="title1">可享受全国34个省份所有已布局及将布局城市如下受全国34个省份<span>全部</span>（实体、虚拟）服务，且享受实体消费<span>折扣</span>优惠</div>
+    <ul class="city-a">
+		{% for key,item in szt_img %}
+		<!--<li class="onh">
+			<p class="city1"><img  src="{{item['path']}}" alt=""></p>
+			<span>{{item['title']}}</span>
+		</li>-->
+		<li class="onh">
+					<div class="city2" hidden>
+						<div class="image-a"><img src="{{item['path2']}}" alt=""></div>
+						<p class="city3">{{item['title']}}</p>
+						<p class="city4">{{item['title2']}}</p>
+					</div>
+					<div class="c1">
+						<p class="city1"><img src="{{item['path']}}" alt=""></p>
+						<span>{{item['title']}}</span>
+					</div>
+				</li>
+		{% endfor %}
+	</ul>
+	<div class="ddt4">
+    	<div class="ddt5">目前开通城市:</div>
+        <div class="ddt6">
+			{% for key,item in content['open'] %}
+				<div>{{item}}</div>
+			{% endfor %}
+        </div>
+    </div>
+    
+    <div class="ddt4">
+    	<div class="ddt5">即将开通城市:</div>
+        <div class="ddt6">
+			{% for key,item in content['no_open'] %}
+				<div>{{item}}</div>
+			{% endfor %}
+        </div>
+    </div>
+    <p class="title2">加入会员可获资源</p>
+
+	<div class="vip">
+		{% for key,item in content['get_res'] %}
+		<div>
+			<p>{{item['num']}}</p>
+			{{item['title']}}
+		</div>
+		{% endfor %}
+	</div>
+    <p class="title2">可选套餐</p>
+    <div class="table" style="padding-top:0px;">
+		<ul>
+			<li>
+				<div class="table1">套餐类型</div>
+				<div class="table2">套餐金额</div>
+				<div class="table2">所有项目单价</div>
+				<div class="table4">赠送项目</div>
+				<div class="table5">经理使用券</div>
+				<div class="table5">会议室使用券</div>
+				<div class="table5">会客室使用券</div>
+				<div class="table5-a">每消费一元积一分<br /><p>（积分可用于实体消费）</p></div>
+				<div class="table5">获取平台海量资源权限</div>
+				<div class="table2">赠送总额</div>
+			</li>
+			{% for key,item in content['szt_tc'] %}
+			<li class="ccc">
+				<div class="table1">{{item['type']}}</div>
+				<div class="table2-a">￥{{item['money']}}</div>
+				<div class="table3"><span>{{item['discount']}}</span>折</div>
+				<div class="table4">{{item['give']}}</div>
+				<div class="table5"><span>{{item['use_jls']}}</span>张</div>
+				<div class="table5"><span>{{item['use_hys']}}</span>小时</div>
+				<div class="table5"><span>{{item['use_hks']}}</span>小时</div>
+				<div class="table5-a">{{item['integral']}}</div>
+				<div class="table5">{{item['get_res']}}</div>
+				<div class="table3"><span>¥ {{item['gift_amount']}}</span></div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+    <p class="czcp5">此款产品会员享受所有城市的虚拟服务，且可以用会员卡金额进行实体消费，但是金额的50%需作为押金，冻结。消费完50%后需要重新充值或可以申请退款。</p>
+    <div class="czcp6">
+		神州通   <tc id="tc_name">A套餐</tc>:<span id="tc_money">¥10000</span>元/年
+    </div>
+    <div class="ddt15"><a href="/Hmtong/hmtSZTOrderDetails">立即购买</a></div>
+    <div class="ddt8">购买使用流程</div>
+    <div class="ddt9"><img src="/resource/front/images/1265.png" /></div> 
+    <div class="procedure">
+    		<p style="padding-left: 28px">选购会员卡</p>
+    		<p style="padding-left: 48px">提交订单</p>
+    		<p style="padding-left: 58px">支付订单</p>
+    		<p style="padding-left: 72px">购买成功</p>
+    		<p style="padding-left: 38px">填写企业信息,签订合同</p>
+    		<p style="padding-left: 88px">正式使用服务</p>
+    	</div>
+ </div>
+<script>
+	$(".ccc").hover(function () {
+		var type = $(this).find('.table1').html();
+		var money = $(this).find('.table2-a').html();
+		$("#tc_name").html(type);
+		$("#tc_money").html(money);
+
+	})
+	
+	$(function () {
+    $("li.onh").hover(function(){
+        $(this).find('.city2').show();
+		$(this).find('.c1').hide();
+	},function(){
+		$(this).find('.city2').hide();
+		$(this).find('.c1').show();
+	});
+
+    })
+</script>
+
+{% include 'front/footer.html' %}

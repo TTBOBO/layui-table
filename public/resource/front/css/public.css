@@ -1,0 +1,13 @@
+.goods_info ul li{
+	float: left;
+    position: relative;
+    margin-right: -1px;
+    margin-bottom: -1px;
+    width: 296px;
+    height: 412px;
+    border: 1px solid #eee;
+    background: #fff;
+    overflow: hidden;
+    font-size: 14px;
+    transition: all .3s;
+}

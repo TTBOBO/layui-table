@@ -1,0 +1,37 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 720px; padding-bottom: 30px;">
+</form>
+<script src="/resource/admin/js/jslib/citys.js"></script>
+<!--<script src="/resource/admin/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>-->
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [
+					{type: "select",name: "渠道类型",field: "name",verify:"required",url:'/admin/im/Api_channel_cate/grid',colKey:'id',colName:'name'},
+					{type: "time",name: "创建时间",field: "create_at",verify:"required"}
+				],
+				selectKey:"",   //列字段id   例: id, product_id
+				infoUrl:"/admin/im/Api_channel_cate/info",   //编辑详情接口
+				addEditUrl:'/admin/im/Api_channel_cate/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/auser/channel_type'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>

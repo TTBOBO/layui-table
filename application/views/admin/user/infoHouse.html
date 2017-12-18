@@ -1,0 +1,68 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '申请人',val: 'um_look_house.uid',w:'300'},
+						{name: '店铺ID',val: 'im_shop.name'},
+						{name: '预约时间',val: 'um_look_house.start_at'},
+						{name: '姓名',val: 'um_look_house.name'},
+						{name: '电话',val: 'um_look_house.phone'},
+						{name: '人数',val: 'um_look_house.num'},
+						{name: '状态',val: 'um_look_house.status',select:true},
+						{name: '备注',val: 'um_look_house.remark'},
+						{name: '看房验证码',val: 'um_look_house.code',w:'500'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/pm/api_look_house/info',
+					method: "post",
+					data: {
+						filter : "um_look_house.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "um_look_house.status",
+								val: ['提交审核', '通过','失败']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+

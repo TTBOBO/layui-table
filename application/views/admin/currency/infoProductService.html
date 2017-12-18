@@ -1,0 +1,64 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '类型id',val: 'pm_product_service.type_id'},
+						{name: '产品名称',val: 'pm_product_service.name'},
+						{name: '访问量',val: 'pm_product_service.vist_num'},
+						{name: '公司id',val: 'um_company-company.name'},
+						{name: '详情图片',val: 'pm_product_service.pic',type:'img'},
+						{name: '市场价',val: 'pm_product_service.price'},
+						{name: '会员价',val: 'pm_product_service.v_price'},
+						{name: '买点',val: 'pm_product_service.buy_point'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/pm/Api_product_service/info',
+					method: "post",
+					data: {
+						filter : "pm_product_service.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+

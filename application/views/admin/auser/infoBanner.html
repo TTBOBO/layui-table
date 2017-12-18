@@ -1,0 +1,66 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '广告ID',val: 'am_ads.id'},
+						{name: '广告名称',val: 'am_ads.name'},
+						{name: '广告类型',val: 'am_ads_type.type'},
+						{name: '广告图片',val: 'am_ads.img',type:'img'},
+						{name: '链接地址',val: 'am_ads.link',w:300},
+						{name: '广告描述',val: 'am_ads.description'},
+						{name: '开始时间',val: 'am_ads.begin_at',w:300},
+						{name: '结束时间',val: 'am_ads.end_at',w:300},
+						{name: '创建时间',val: 'am_ads.create_at',w:300},
+						{name: '修改时间',val: 'am_ads.update_at',w:300}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/am/Api_ads/info',
+					method: "post",
+					data: {
+						filter : "am_ads.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+

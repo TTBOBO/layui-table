@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+	<title>海脉空间 - {{title.title}}</title>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<title></title>
+	<link rel="stylesheet" href="../resource/home/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../resource/home/fonts/material-icons.css">
+	<link rel="stylesheet" href="../resource/home/css/ioffice.css">
+	<link rel="stylesheet" href="../resource/home/css/tyle.css">
+</head>
+<body style="background-color:#f9f9f9;">
+	{% include 'front/h_header.html' %}
+	<div class="store h-bo-banner" style="margin-top: 0;">
+		<div id="slideBox" class="slideBox" style="height: auto;">
+			<div class="hd">
+				<ul><li></li><li></li><li></li></ul>
+			</div>
+			<div class="bd">
+				<ul>
+					<li><a href="javascript:;"><img src="../resource/home/images/hbo-t1.png" /></a></li>
+					<li><a href="javascript:;"><img src="../resource/home/images/hbo-t1.png" /></a></li>
+					<li><a href="javascript:;"><img src="../resource/home/images/hbo-t1.png" /></a></li>
+				</ul>
+			</div>
+			<a class="prev" href="javascript:void(0)"></a>
+			<a class="next" href="javascript:void(0)"></a>
+		</div>
+	</div>
+
+	<div class="hqst-main">
+		<div class="hqst-container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="hqst-card-column">
+						<div class="hqsta-card">
+							<a href="/hmspace/resources_list"><img src="../resource/home/images/hqst-t1.png"></a>
+							<p class="hqsta-card-bp">互联网（15422）</p>
+						</div>
+						<div class="hqsta-card">
+							<a href="/hmspace/resources_list"><img src="../resource/home/images/hqst-t1.png"></a>
+							<p class="hqsta-card-bp">互联网（15422）</p>
+						</div>
+						<div class="hqsta-card">
+							<a href="/hmspace/resources_list"><img src="../resource/home/images/hqst-t1.png"></a>
+							<p class="hqsta-card-bp">互联网（15422）</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="hqst-card-column">
+						<div class="hqsta-card">
+							<a href="/hmspace/resources_list"><img src="../resource/home/images/hqst-t1.png"></a>
+							<p class="hqsta-card-bp">互联网（15422）</p>
+						</div>
+						<div class="hqsta-card">
+							<a href="/hmspace/resources_list"><img src="../resource/home/images/hqst-t1.png"></a>
+							<p class="hqsta-card-bp">互联网（15422）</p>
+						</div>
+						<div class="hqsta-card">
+							<a href="/hmspace/resources_list"><img src="../resource/home/images/hqst-t1.png"></a>
+							<p class="hqsta-card-bp">互联网（15422）</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="hqst-card-column">
+						<div class="hqstaa-card">
+							<img src="../resource/home/images/hqst-t2.png">
+							<div class="hqst-card-wmb">
+								<p class="hqst-card-wmb-pa">渠道人才</p>
+								<p class="hqst-card-wmb-pb">为您推荐合适人选</p>
+								<a href="/hmspace/talent"><p>点击查看</p></a>
+								<div class="hqst-card-xmb"></div>
+							</div>
+						</div>
+						<div class="hqsta-card">
+							<a href="/hmspace/resources_list"><img src="../resource/home/images/hqst-t1.png"></a>
+							<p class="hqsta-card-bp">互联网（15422）</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="hqst-recommend">
+		<div class="hqst-container">
+			<div class="sto-alo"></div>
+			<p class="sto-company">推荐渠道</p>
+			<a href="/hmspace/resources_list" class="more">查看全部 ></a>
+			<div class="row">
+				{% for data in data.data.rows %}
+				<div class="col-md-4">
+					<div class="hrl-card">
+						<img src="../resource/home/images/{{data.logo}}" alt="">
+						<p class="hrl-card_name">{{data.name}}</p>
+						<p class="hrl-card_js">公司概述:{{data.description}}</p>
+						<ul class="hrl-card-ul">
+							<li class="hrl-card-lia">{{data.special_info}}</li>
+							<li class="hrl-card-lib"><span>①{{data.recommend_reason}}</span></li>
+							<li class="hrl-card-lic"><span>②{{data.recommend_reason}}</span></li>
+							<li class="hrl-card-lid"><span>③{{data.recommend_reason}}</span></li>
+						</ul>
+						<div class="hrl-card-hr"></div>
+						<a href="/hmspace/resources_view?id={{data.id}}"><button class="btn btn-default hrl-card-iw" type="submit">我想合作</button></a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class="hqst-bimg">
+		<img src="../resource/home/images/hqst-t3.png">
+		<p>渠速拓，快速拓展企业发展合作渠道</p>
+	</div>
+
+	<div class="rightfix">
+		<div class="online">
+			<a href="javascript:;"><img src="../resource/home/images/online.png" alt="">在线咨询</a>
+		</div>
+		<div class="fixmenu">
+			<ul>
+				<li><a href="javascript:;"><img src="../resource/home/images/trolley.png" alt=""></a></li>
+				<li><a href="javascript:;"><img src="../resource/home/images/phone.png" alt=""></a></li>
+				<li><a href="javascript:;"><img src="../resource/home/images/weixin.png" alt=""></a></li>
+				<li><a href="javascript:;"><img src="../resource/home/images/weibo.png" alt=""></a></li>
+			</ul>
+		</div>
+	</div>
+{% include 'front/footer.html' %}
+	
+	<script src="../resource/home/js/jquery-1.11.3.min.js"></script>
+	<script src="../resource/home/js/bootstrap.min.js"></script>
+	<script src="../resource/home/js/jquery.SuperSlide.js"></script>
+	<script>
+		jQuery(".slideBox").slide({mainCell:".bd ul",effect:"fold",autoPlay:true,delayTime:1000});
+		jQuery(".sto-people").slide({mainCell:".bd ul",effect:"top",autoPlay:true,vis:2});
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+{% include 'admin/iheader.html' %}
+{% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<script type="text/html" id="barDemo">
+	 <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initTabel();
+		},
+		initTabel: function() {
+			hm.load(function(option) {
+				var table = option.table;
+				var public = option.public;
+				public.showTable({
+					topTool: {
+						btnArr: [{title: "添加",type: "add"},
+						{title: "批量删除",type: "plDel",class: "layui-btn-danger"},
+						{title: "高级搜索",type: "hSearch"},
+						{title: "导入",type: "improt"},
+						{title: "导出",type: "export"}
+						]
+					},
+					cols: [{checkbox: true,},
+						{field: "om_iof_order-id",width: 80,sort: true,title: "主键",type: "",sear: "om_iof_order-id"},
+						{field: "um_user-username",width: 120,title: "用户名",type: "",sear: "um_user-username"},
+						{field: "um_company-logo",width: 150,title: "公司logo",type: "image",sear: ""},
+						{field: "um_company-company_name",width: 150,title: "公司名称",type: "",sear: "um_company-company_name"},
+						{field: "um_company-website",width: 150,title: "公司网址",type: "",sear: "um_company-website"},
+						{field: "um_company-legal_person",width: 150,title: "公司法人",type: "",sear: "um_company-legal_person"},
+						{field: "um_company-business_license",width: 150,title: "营业执照",type: "",sear: ""},
+						{field: "um_company-tel",width: 150,title: "公司联系电话",type: "",sear: "um_company-tel"},
+						{field: "right",width: 150,title: "操作",toolbar: ykp.$('#barDemo'),align: "center",fixed: 'right'}
+					],
+					reader: {
+						elem: "#tabel_user",
+						url: "{{base_url}}admin/am/api_rz_company/grid",
+						method: "post",
+						id: 'tabel_user',
+						 where: {
+                            filter: ""
+                        },
+					},
+					autoCol: true, //自定义列表,
+					tool: {
+						id: "om_iof_order-id",  //该行id字段名
+						//是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+						Event: [{type: "edit",url: '{{base_url}}admin/auser/editEnterCompany?id='},
+							{type: "detail",url: '{{base_url}}admin/auser/infoEnterCompany?id='},
+							{type: "del", url: '/admin/am/api_rz_company/delete'}
+						]
+					},
+					topBtnActive: {
+						Event: [
+							{type: "add",url: '{{base_url}}admin/auser/addEnterCompany'},
+							{type: "plDel",url: '{{base_url}}admin/am/api_rz_company/delete'},
+							{type: "improt",url: "/upload"},
+							{type: "export",url: "/upload"}
+						]
+					}
+				});
+			});
+			
+			function getData(res,callback) {
+				console.log(res);
+				if(typeof callback == 'function') {
+					callback(res.data);
+				}
+				console.log(res.data);
+			}
+		}
+	});
+</script>
+</body>
+
+</html>

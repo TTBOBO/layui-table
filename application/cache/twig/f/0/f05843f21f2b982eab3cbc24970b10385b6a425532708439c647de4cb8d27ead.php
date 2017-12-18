@@ -1,0 +1,208 @@
+<?php
+
+/* admin/auser/auser.html */
+class __TwigTemplate_417527b85dd0b66c678e616a78bb7d177f3c52d895f760980ccd14ba03e026e3 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = false;
+
+        $this->blocks = array(
+        );
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        // line 1
+        $this->loadTemplate("admin/iheader.html", "admin/auser/auser.html", 1)->display($context);
+        // line 2
+        echo "<style>
+
+</style>
+";
+        // line 5
+        $this->loadTemplate("admin/crumbs.html", "admin/auser/auser.html", 5)->display($context);
+        // line 6
+        echo "<table class=\"layui-hide\" id=\"tabel_user\" lay-filter=\"tabel_user\"></table>
+";
+        // line 7
+        $this->loadTemplate("admin/import.html", "admin/auser/auser.html", 7)->display($context);
+        // line 8
+        echo "<script type=\"text/html\" id=\"barDemo\">
+    <a class=\"layui-btn layui-btn-primary layui-btn-mini\" lay-event=\"detail\">查看</a>
+    <a class=\"layui-btn layui-btn-mini\" lay-event=\"edit\">编辑</a>
+    <a class=\"layui-btn layui-btn-danger layui-btn-mini\" lay-event=\"del\">删除</a>
+</script>
+<script>
+    ykp.defineClass(['element', \"jquery\", 'laytpl'], {
+        init: function () {
+            var it = this;
+            //初始化列表
+            it.initTabel();
+        },
+        initTabel: function () {
+            hm.load(function (option) {
+                var table = option.table;
+                var public = option.public;
+                public.showTable({
+                    topTool: {
+                        btnArr: [{title: \"添加\", type: \"add\", url: \"/admin/product/addService\"},
+                            {title: \"搜索\", type: \"hSearch\", },
+                            {title: \"批量删除\", type: \"plDel\", class: \"layui-btn-danger\", url: \"/admin/api_auser/delete\"},
+                            {title: \"导入\", type: \"improt\", },
+                            {title: \"导出\", type: \"export\", }]
+                    },
+                    cols: [{checkbox: true, },
+                        {field: \"am_admin-aid\", width: 50, sort: true, title: \"ID\", type: \"\", sear: \"am_admin-aid\"},
+                        {field: \"am_admin-username\", width: 100, title: \"用户名\", type: \"\", sear: \"am_admin-username\", },
+                        {field: \"am_admin-realname\", width: 100, title: \"真实姓名\", type: \"\", sear: \"am_admin-realname\"},
+                        /*{field: \"title\", width: 150, title: \"标题简介\", type: \"\", sear: \"sm_service.title\"},
+                         {field: \"content\", width: 150, title: \"服务内容\", type: \"\", sear: \"sm_service.content\"},
+                         {field: \"pics\", width: 80, title: \"图片地址\", type: \"image\", sear: \"sm_service.pice\", },
+                         {field: \"type\", width: 150, title: \"类型\", type: \"select\", sear: \"sm_service.type\", enum: {0: \"虚拟服务\", 1: \"实体服务\"}},
+                         //{field: \"type\", width: 150, title: \"类型\", type: \"select\", sear: \"sm_service.type\", enumOption: {url: '/admin/api_product/f7', resKey: 'data', parentCol: '', parentKey: '', id: 'id', name: 'name', defaultValue: ''}},
+                         {field: \"is_limit_num\", width: 150, title: \"是否限制次数\", type: \"select\", sear: \"sm_service.is_limit_num\", option: [{val: 0, text: \"不限制\"}, {val: 1, text: \"限制\"}]},
+                         {field: \"create_at\", width: 200, sort: true, title: \"创建时间\", type: \"time\", sear: \"sm_service.create_at\"},*/
+                        {field: \"right\", width: 150, title: \"操作\", toolbar: \$('#barDemo'), align: \"center\", fixed: 'right', }
+                    ],
+                    reader: {
+                        elem: \"#tabel_user\",
+                        url: \"/admin/api_auser/grid\",
+                        method: \"post\",
+                        id: 'tabel_user',
+                        where: {
+                            filter: \"\"
+                        },
+                        data: getData
+                    },
+                    autoCol: true, //自定义列表,
+                    tool: {
+                        id: \"am_admin-aid\", //该行id字段名
+                        //是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+                        Event: [{type: \"edit\", url: '/admin/auser/edit_auser?id='},
+                            {type: \"detail\", url: '/admin/auser/auser_info?id='},
+                            {type: \"del\", url: '/admin/api_auser/delete'}
+                        ]
+                    },
+                    topBtnActive: {
+                        Event: [{type: \"add\", url: '/admin/auser/add_auser'},
+                            {type: \"plDel\", url: '/admin/api_auser/delete'},
+                            {type: \"improt\", url: \"/upload\"},
+                            {type: \"export\", url: \"/upload\"}
+                        ]
+                    }
+                });
+            });
+            function getData(res, callback) {
+                if (typeof callback == 'function') {
+                    callback(res.data);
+                }
+            }
+        }
+    });
+</script>
+</body>
+
+</html>";
+    }
+
+    public function getTemplateName()
+    {
+        return "admin/auser/auser.html";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  33 => 8,  31 => 7,  28 => 6,  26 => 5,  21 => 2,  19 => 1,);
+    }
+}
+/* {% include 'admin/iheader.html' %}*/
+/* <style>*/
+/* */
+/* </style>*/
+/* {% include 'admin/crumbs.html' %}*/
+/* <table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>*/
+/* {% include 'admin/import.html' %}*/
+/* <script type="text/html" id="barDemo">*/
+/*     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>*/
+/*     <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>*/
+/*     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>*/
+/* </script>*/
+/* <script>*/
+/*     ykp.defineClass(['element', "jquery", 'laytpl'], {*/
+/*         init: function () {*/
+/*             var it = this;*/
+/*             //初始化列表*/
+/*             it.initTabel();*/
+/*         },*/
+/*         initTabel: function () {*/
+/*             hm.load(function (option) {*/
+/*                 var table = option.table;*/
+/*                 var public = option.public;*/
+/*                 public.showTable({*/
+/*                     topTool: {*/
+/*                         btnArr: [{title: "添加", type: "add", url: "/admin/product/addService"},*/
+/*                             {title: "搜索", type: "hSearch", },*/
+/*                             {title: "批量删除", type: "plDel", class: "layui-btn-danger", url: "/admin/api_auser/delete"},*/
+/*                             {title: "导入", type: "improt", },*/
+/*                             {title: "导出", type: "export", }]*/
+/*                     },*/
+/*                     cols: [{checkbox: true, },*/
+/*                         {field: "am_admin-aid", width: 50, sort: true, title: "ID", type: "", sear: "am_admin-aid"},*/
+/*                         {field: "am_admin-username", width: 100, title: "用户名", type: "", sear: "am_admin-username", },*/
+/*                         {field: "am_admin-realname", width: 100, title: "真实姓名", type: "", sear: "am_admin-realname"},*/
+/*                         /*{field: "title", width: 150, title: "标题简介", type: "", sear: "sm_service.title"},*/
+/*                          {field: "content", width: 150, title: "服务内容", type: "", sear: "sm_service.content"},*/
+/*                          {field: "pics", width: 80, title: "图片地址", type: "image", sear: "sm_service.pice", },*/
+/*                          {field: "type", width: 150, title: "类型", type: "select", sear: "sm_service.type", enum: {0: "虚拟服务", 1: "实体服务"}},*/
+/*                          //{field: "type", width: 150, title: "类型", type: "select", sear: "sm_service.type", enumOption: {url: '/admin/api_product/f7', resKey: 'data', parentCol: '', parentKey: '', id: 'id', name: 'name', defaultValue: ''}},*/
+/*                          {field: "is_limit_num", width: 150, title: "是否限制次数", type: "select", sear: "sm_service.is_limit_num", option: [{val: 0, text: "不限制"}, {val: 1, text: "限制"}]},*/
+/*                          {field: "create_at", width: 200, sort: true, title: "创建时间", type: "time", sear: "sm_service.create_at"},*//* */
+/*                         {field: "right", width: 150, title: "操作", toolbar: $('#barDemo'), align: "center", fixed: 'right', }*/
+/*                     ],*/
+/*                     reader: {*/
+/*                         elem: "#tabel_user",*/
+/*                         url: "/admin/api_auser/grid",*/
+/*                         method: "post",*/
+/*                         id: 'tabel_user',*/
+/*                         where: {*/
+/*                             filter: ""*/
+/*                         },*/
+/*                         data: getData*/
+/*                     },*/
+/*                     autoCol: true, //自定义列表,*/
+/*                     tool: {*/
+/*                         id: "am_admin-aid", //该行id字段名*/
+/*                         //是否执行跳转页面操作    true 不跳转  false 跳转  默认为false*/
+/*                         Event: [{type: "edit", url: '/admin/auser/edit_auser?id='},*/
+/*                             {type: "detail", url: '/admin/auser/auser_info?id='},*/
+/*                             {type: "del", url: '/admin/api_auser/delete'}*/
+/*                         ]*/
+/*                     },*/
+/*                     topBtnActive: {*/
+/*                         Event: [{type: "add", url: '/admin/auser/add_auser'},*/
+/*                             {type: "plDel", url: '/admin/api_auser/delete'},*/
+/*                             {type: "improt", url: "/upload"},*/
+/*                             {type: "export", url: "/upload"}*/
+/*                         ]*/
+/*                     }*/
+/*                 });*/
+/*             });*/
+/*             function getData(res, callback) {*/
+/*                 if (typeof callback == 'function') {*/
+/*                     callback(res.data);*/
+/*                 }*/
+/*             }*/
+/*         }*/
+/*     });*/
+/* </script>*/
+/* </body>*/
+/* */
+/* </html>*/

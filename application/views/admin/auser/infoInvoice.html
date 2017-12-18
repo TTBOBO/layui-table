@@ -1,0 +1,72 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '发票名称',val: 'am_invoice.name'},
+						{name: '公司名称',val: 'um_company.company_id'},
+						{name: '金额',val: 'am_invoice.price'},
+						{name: '税点',val: 'am_invoice.tax_point',w:300},
+						{name: '类型',val: 'am_invoice.type',select:true},
+						{name: '发票图片',val: 'am_invoice.pic',type:'img'},
+						{name: '快递费用',val: 'am_invoice.express_price'},
+						{name: '邮寄状态',val: 'am_invoice.express_status',select:true},
+						{name: '快递编码',val: 'am_invoice.express_code'},
+						{name: '快递名称',val: 'am_invoice.express_name'},
+						{name: '创建时间',val: 'am_invoice.create_at',w:300},
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/am/Api_invoice/info',
+					method: "post",
+					data: {
+						filter : "am_invoice.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,statuArr: [{
+								name: "am_invoice.type",
+								val: ['普票', '专票']
+							},,{
+								name: "am_invoice.express_status",
+								val: ['未寄出', '已寄出']
+							}]
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+

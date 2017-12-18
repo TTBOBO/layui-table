@@ -1,0 +1,71 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '消息通知ID',val: 'nm_notice.id'},
+						{name: '消息名称',val: 'nm_notice.name'},
+						{name: '类型',val: 'nm_notice_type.type_id'},
+						{name: '描述',val: 'nm_notice.description'},
+						{name: '点击链接',val: 'nm_notice.link'},
+						{name: '用户id',val: 'um_user.uid'},
+						{name: '状态',val: 'nm_notice.status'},
+						{name: '自定义图表',val: 'nm_notice.thumb',type:"img"},
+						{name: '参数',val: 'nm_notice.param'},
+						{name: '阅读时间',val: 'nm_notice.read_at'},
+						{name: '创建时间',val: 'nm_notice.create_at',w:300},
+						{name: '更新时间',val: 'nm_notice.update_at',w:300}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/nm/api_notice/info',
+					method: "post",
+					data: {
+						filter:"nm_notice.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+
+
+
+

@@ -1,0 +1,69 @@
+{% include 'admin/iheader.html' %}
+{% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<script type="text/html" id="barDemo">
+	 <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+</script>
+<script>
+    ykp.defineClass(['element', "jquery", 'laytpl'], {
+        init: function () {
+            var it = this;
+            //初始化列表
+            it.initTabel();
+        },
+        initTabel: function () {
+            hm.load(function (option) {
+                var table = option.table;
+                var public = option.public;
+                public.showTable({
+                    topTool: {
+                        btnArr: [{title: "添加",type: "add",url: "{{base_url}}admin/currency/add_region"},
+                            {title: "高级搜索", type: "hSearch"},
+                          {title: "导出", type: "export"}
+                            ]
+                    },
+                    cols: [{checkbox: true, },
+                        {field: "id", width: 80, sort: true, title: "ID", type: "", sear: "id"},
+                        {field: "parent_id", width: 80, title: "父类ID", type: "", sear: "parent_id"},
+                        {field: "name", width: 80, title: "名称", type: "", sear: "name",},
+                        {field: "alias", width: 150, title: "别名", type: "", sear: "alias"},
+                        {field: "pinyin", width: 150, title: "拼音", type: "", sear: "pinyin"},
+                        {field: "abbr", width: 80, title: "简写", type: "", sear: "abbr"},
+                        {field: "zip", width: 150, title: "邮编", type: "", sear: "zip"},
+                        {field: "level", width: 150, title: "级别", sear: "level"},
+                      	{field: "right", width: 180, title: "操作", toolbar: $('#barDemo'), align: "center", fixed: 'right', }
+                    ],
+                    reader: {
+                        elem: "#tabel_user",
+                        url: "/admin/pm/Api_regions/grid",
+                        method: "post",
+                        id: 'tabel_user',
+                        where: {
+                            filter: ""
+                        },
+                    },
+                    autoCol: true, //自定义列表,
+                    tool: {
+                        id: "id", //该行id字段名
+                        //是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+                        Event: [{type: "edit",url: '{{base_url}}admin/currency/edit_region?id='},
+                            {type: "detail", url: '/admin/currency/info_region?id='}
+                        ]
+                    },
+                    topBtnActive: {
+                        Event: [{type: "add",url: '{{base_url}}admin/currency/add_region'},
+                            {type: "improt", url: "/upload"},
+                            {type: "export", url: "/upload"}
+                        ]
+                    }
+                });
+            });
+
+        }
+    });
+</script>
+</body>
+
+</html>

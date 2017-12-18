@@ -1,0 +1,48 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 700px; padding-bottom: 30px;">
+</form>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [
+					{type: "text",name: "省市区(县)代号",verify:"pInt",field: "region_code"},
+					{type: "text",name: "省市区(县)名称",field: "region_name"},
+					{type: "text",name: "父级id",field: "parent_id"},
+					{type: "text",name: "省市区(县)级别",field: "region_level"},
+					{type: "text",name: "排序",field: "region_order"},
+					{type: "text",name: "英文名称",field: "region_name_en",verify:"stre"},
+					{type: "text",name: "英文简写",field: "region_shortname_en"}
+				],
+				selectKey:"",   //列字段id   例: id, product_id
+				verifyData:{
+					option: [{
+						verifyDate: "pInt"
+				},{
+						verifyDate: "stre"
+				}],
+					el: ".layui-form"
+				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"/admin/pm/Api_pm_region1/info",   //编辑详情接口
+				addEditUrl:'/admin/pm/Api_pm_region1/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/currency/pm_region1'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>

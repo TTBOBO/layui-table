@@ -1,0 +1,67 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '编号',val: 'id'},
+						{name: '商机名称',val: 'name'},
+						{name: '商机标题',val: 'title',w:'300'},
+						{name: '商机图片',val: 'pic'},
+						{name: '商机所在地址',val: 'addr'},
+						{name: '商机日期',val: 'date'},
+						{name: '开始时间',val: 'start_time',w:300},
+						{name: '结束时间',val: 'end_time',w:300},
+						{name: '详细描述',val: 'desc'},
+						{name: '创建时间',val: 'create_at',w:300}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/am/Api_business_dynamics/info',
+					method: "post",
+					data: {
+						filter : "id=" + result.id 
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,204 @@
+<?php
+
+/* admin/auser/permission.html */
+class __TwigTemplate_fa2002801711e14bf33335a942c0dfcb97d3ace5557ebf699cf2b6dcf7a78657 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = false;
+
+        $this->blocks = array(
+        );
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        // line 1
+        $this->loadTemplate("admin/iheader.html", "admin/auser/permission.html", 1)->display($context);
+        // line 2
+        echo "<style>
+
+</style>
+";
+        // line 5
+        $this->loadTemplate("admin/crumbs.html", "admin/auser/permission.html", 5)->display($context);
+        // line 6
+        echo "<table class=\"layui-hide\" id=\"tabel_user\" lay-filter=\"tabel_user\"></table>
+";
+        // line 7
+        $this->loadTemplate("admin/import.html", "admin/auser/permission.html", 7)->display($context);
+        // line 8
+        echo "<script type=\"text/html\" id=\"barDemo\">
+    <a class=\"layui-btn layui-btn-primary layui-btn-mini\" lay-event=\"detail\">查看</a>
+    <!--<a class=\"layui-btn layui-btn-mini\" lay-event=\"edit\">编辑</a>-->
+</script>
+<script>
+    ykp.defineClass(['element', \"jquery\", 'laytpl'], {
+        init: function () {
+            var it = this;
+            //初始化列表
+            it.initTabel();
+        },
+        initTabel: function () {
+            hm.load(function (option) {
+                var table = option.table;
+                var public = option.public;
+                public.showTable({
+                    topTool: {
+                        btnArr: [
+//                          {title: \"添加\", type: \"add\", url: \"/admin/product/addService\"},
+                            {title: \"搜索\", type: \"hSearch\"},
+                            {title: \"导出\", type: \"export\"}]
+                    },
+                    cols: [{checkbox: true, },
+                        {field: \"am_permission-id\", width: 50, sort: true, title: \"ID\", type: \"\", sear: \"am_permission-id\"},
+                        {field: \"am_permission-title\", width: 100, title: \"权限名称\", type: \"\", sear: \"am_permission-title\"},
+                        {field: \"am_permission-href\", width: 180, title: \"权限路径\", type: \"\", sear: \"am_permission-href\"},
+                        {field: \"am_permission-type\", width: 80, title: \"类型\", type: \"select\",enum: {0:'列表',1:'按钮'}, sear: \"am_permission-parent_id\"},
+                        {field: \"am_permission-parent_id\", width: 80, title: \"上级ID\",sort: true,  type: \"\", sear: \"am_permission-parent_id\"},
+                        {field: \"am_permission-icon\", width: 150, title: \"图标\", type: \"\", sear: \"am_permission-icon\"},
+                        {field: \"am_permission-active\", width: 50, title: \"活动\", type: \"select\", enum: {0: '关闭', 1: '打开'},sear: \"am_permission-active\"},
+                        {field: \"am_permission-menu_open\", width: 80, title: \"是否打开\", type: \"select\",enum: {0: '关闭', 1: '打开'}, sear: \"am_permission-menu_open\"},
+                        {field: \"am_permission-create_at\", width: 150, title: \"创建时间\", type: \"time\", sear: \"am_permission-create_at\"},
+                        {field: \"am_permission-update_at\", width: 150, title: \"修改时间\", type: \"time\", sear: \"am_permission-update_at\",hidden:true},
+                        {field: \"right\", width: 150, title: \"操作\", toolbar: \$('#barDemo'), align: \"center\", fixed: 'right'}
+                    ],
+                    reader: {
+                        elem: \"#tabel_user\",
+                        url: \"/admin/api_permission/grid\",
+                        method: \"post\",
+                        id: 'tabel_user',
+                        where: {
+                            filter: \"\",
+                            order:'am_permission-id'
+                        },
+                        data: getData
+                    },
+                    autoCol: true, //自定义列表,
+                    tool: {
+                        id: \"am_permission-id\", //该行id字段名
+                        //是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+                        Event: [{type: \"edit\", url: '/admin/auser/edit_auser?id='},
+                            {type: \"detail\", url: '/admin/auser/auser_info?id='},
+                        ]
+                    },
+                    topBtnActive: {
+                        Event: [{type: \"add\", url: '/admin/auser/add_auser'},
+                            {type: \"plDel\", url: '/admin/api_permission/delete'},
+                            {type: \"improt\", url: \"/upload\"},
+                            {type: \"export\", url: \"/upload\"}
+                        ]
+                    }
+                });
+            });
+            function getData(res, callback) {
+                if (typeof callback == 'function') {
+                    callback(res.data);
+                }
+            }
+        }
+    });
+</script>
+</body>
+
+</html>";
+    }
+
+    public function getTemplateName()
+    {
+        return "admin/auser/permission.html";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  33 => 8,  31 => 7,  28 => 6,  26 => 5,  21 => 2,  19 => 1,);
+    }
+}
+/* {% include 'admin/iheader.html' %}*/
+/* <style>*/
+/* */
+/* </style>*/
+/* {% include 'admin/crumbs.html' %}*/
+/* <table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>*/
+/* {% include 'admin/import.html' %}*/
+/* <script type="text/html" id="barDemo">*/
+/*     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>*/
+/*     <!--<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>-->*/
+/* </script>*/
+/* <script>*/
+/*     ykp.defineClass(['element', "jquery", 'laytpl'], {*/
+/*         init: function () {*/
+/*             var it = this;*/
+/*             //初始化列表*/
+/*             it.initTabel();*/
+/*         },*/
+/*         initTabel: function () {*/
+/*             hm.load(function (option) {*/
+/*                 var table = option.table;*/
+/*                 var public = option.public;*/
+/*                 public.showTable({*/
+/*                     topTool: {*/
+/*                         btnArr: [*/
+/* //                          {title: "添加", type: "add", url: "/admin/product/addService"},*/
+/*                             {title: "搜索", type: "hSearch"},*/
+/*                             {title: "导出", type: "export"}]*/
+/*                     },*/
+/*                     cols: [{checkbox: true, },*/
+/*                         {field: "am_permission-id", width: 50, sort: true, title: "ID", type: "", sear: "am_permission-id"},*/
+/*                         {field: "am_permission-title", width: 100, title: "权限名称", type: "", sear: "am_permission-title"},*/
+/*                         {field: "am_permission-href", width: 180, title: "权限路径", type: "", sear: "am_permission-href"},*/
+/*                         {field: "am_permission-type", width: 80, title: "类型", type: "select",enum: {0:'列表',1:'按钮'}, sear: "am_permission-parent_id"},*/
+/*                         {field: "am_permission-parent_id", width: 80, title: "上级ID",sort: true,  type: "", sear: "am_permission-parent_id"},*/
+/*                         {field: "am_permission-icon", width: 150, title: "图标", type: "", sear: "am_permission-icon"},*/
+/*                         {field: "am_permission-active", width: 50, title: "活动", type: "select", enum: {0: '关闭', 1: '打开'},sear: "am_permission-active"},*/
+/*                         {field: "am_permission-menu_open", width: 80, title: "是否打开", type: "select",enum: {0: '关闭', 1: '打开'}, sear: "am_permission-menu_open"},*/
+/*                         {field: "am_permission-create_at", width: 150, title: "创建时间", type: "time", sear: "am_permission-create_at"},*/
+/*                         {field: "am_permission-update_at", width: 150, title: "修改时间", type: "time", sear: "am_permission-update_at",hidden:true},*/
+/*                         {field: "right", width: 150, title: "操作", toolbar: $('#barDemo'), align: "center", fixed: 'right'}*/
+/*                     ],*/
+/*                     reader: {*/
+/*                         elem: "#tabel_user",*/
+/*                         url: "/admin/api_permission/grid",*/
+/*                         method: "post",*/
+/*                         id: 'tabel_user',*/
+/*                         where: {*/
+/*                             filter: "",*/
+/*                             order:'am_permission-id'*/
+/*                         },*/
+/*                         data: getData*/
+/*                     },*/
+/*                     autoCol: true, //自定义列表,*/
+/*                     tool: {*/
+/*                         id: "am_permission-id", //该行id字段名*/
+/*                         //是否执行跳转页面操作    true 不跳转  false 跳转  默认为false*/
+/*                         Event: [{type: "edit", url: '/admin/auser/edit_auser?id='},*/
+/*                             {type: "detail", url: '/admin/auser/auser_info?id='},*/
+/*                         ]*/
+/*                     },*/
+/*                     topBtnActive: {*/
+/*                         Event: [{type: "add", url: '/admin/auser/add_auser'},*/
+/*                             {type: "plDel", url: '/admin/api_permission/delete'},*/
+/*                             {type: "improt", url: "/upload"},*/
+/*                             {type: "export", url: "/upload"}*/
+/*                         ]*/
+/*                     }*/
+/*                 });*/
+/*             });*/
+/*             function getData(res, callback) {*/
+/*                 if (typeof callback == 'function') {*/
+/*                     callback(res.data);*/
+/*                 }*/
+/*             }*/
+/*         }*/
+/*     });*/
+/* </script>*/
+/* </body>*/
+/* */
+/* </html>*/

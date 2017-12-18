@@ -1,0 +1,74 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '判断字段',val: 'name'},
+						{name: '标题名称',val: 'title'},
+						{name: '类型',val: 'type',select:'true'},
+						{name: '网址url',val: 'url'},
+						{name: '图片地址',val: 'picture',type:'img'},
+						{name: '是否显示',val: 'is_show',select:'true'},
+						{name: '排序',val: 'sort'},
+						{name: '备注',val: 'remark'},
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/pm/api_frame/info',
+					method: "post",
+					data: {
+						filter : "id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "type",
+								val: ['其他', '顶部导航','关于我们','商务合作','隐私策略','帮助中心']
+							},{
+								name: "is_show",
+								val: ['否', '是']
+							}]
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+
+
+
+

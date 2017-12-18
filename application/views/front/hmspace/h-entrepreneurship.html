@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+	<title>海脉空间 - {{title.title}}</title>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<title></title>
+	<link rel="stylesheet" href="../resource/home/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../resource/home/fonts/material-icons.css">
+	<link rel="stylesheet" href="../resource/home/css/ioffice.css">
+	<link rel="stylesheet" href="../resource/home/css/wstyle.css">
+</head>
+<body style="background-color:#f9f9f9 !important;">
+{% include 'front/h_header.html' %}
+	<div class='store'>
+	<div id="slideBox" class="slideBox">
+			<div class="hd">
+				<ul><li></li><li></li><li></li></ul>
+			</div>
+			<div class="bd">
+				<ul>
+					<li><a href="javascript:;"><img src="../resource/home/images/1137.png" /></a></li>
+					<li><a href="javascript:;"><img src="../resource/home/images/1137.png" /></a></li>
+					<li><a href="javascript:;"><img src="../resource/home/images/1137.png" /></a></li>
+				</ul>
+			</div>
+			<a class="prev" href="javascript:void(0)"></a>
+			<a class="next" href="javascript:void(0)"></a>
+		</div>
+	</div>
+	<div class="fixtainer zcontainer ship">
+
+		 <div class="rightfix">
+			<div class="online">
+				<a href="javascript:;"><img src="../resource/home/images/online.png" alt="">在线咨询</a>
+			</div>
+			<div class="fixmenu">
+				<ul>
+					<li><a href="javascript:;"><img src="../resource/home/images/trolley.png" alt=""></a></li>
+					<li><a href="javascript:;"><img src="../resource/home/images/phone.png" alt=""></a></li>
+					<li><a href="javascript:;"><img src="../resource/home/images/weixin.png" alt=""></a></li>
+					<li><a href="javascript:;"><img src="../resource/home/images/weibo.png" alt=""></a></li>
+				</ul>
+			</div>
+		</div> 
+		<div class="bt">
+			<div class="tab">
+				<div class='tit'>商机动态</div>
+				<div class="bod">
+					{% for data in buss.data.rows %}
+					<a href="/hmspace/business_details?id={{data.id}}">
+					<div class='item'>
+						<div class='l0t'><img src="{{data.pic}}" alt=""></div>
+						<div class='r0t'>
+							<p>{{data.title}}</p>
+							<p><i class="material-icons">place</i>{{data.addr}}</p>
+							<p>{{data.date}}  {{data.start_time}}-{{data.end_time}}</p>
+						</div>
+					</div>
+					</a>
+					{% endfor %}
+				</div>
+				<a href="/hmspace/business"><div class="pbtm">查看更多</div></a>
+			</div>
+			<div class="tab">
+				<div class='tit'>圈子动态</div>
+				<div class="bod">
+					{% for data in circle.data.rows %}
+					<div class='item0 l'>
+						<img src="{{data.pic}}" alt="">
+						<div><p>{{data.title}}</p><p>{{data.people_num}}个人</p></div>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="pbtm">查看更多</div>
+			</div>
+			<div class="tab">
+				<div class='tit'>人脉动态</div>
+				<div class="bod">
+					{% for data in people.data.rows %}
+					<a href="/hmspace/talent_details?id={{data.id}}">
+					<div class="item1">
+						<div class='l0t'><img src="{{data.avatar}}" alt=""></div>
+						<div class='r0t'>
+							<p><span class='t0'>{{data.name}}</span><span>{{data.job_title}}</span></p>
+							<p>{{data.company_name}}</p>
+						</div>
+					</div>
+					</a>
+					{% endfor %}
+				</div>
+				<a href="/hmspace/talent"> <div class="pbtm">查看更多</div></a>
+			</div>
+		</div>
+	</div>
+	<div class='ship_banner'>
+		<img src="../resource/home/images/ship-banner.png" alt="">
+		<div class="newtainer">
+			<div class="code2">
+				<img src="../resource/home/images/erweima.png" alt="">
+				<p>海脉APP，即刻下载</p>			
+			</div>
+		</div>
+	</div>
+
+
+<div class="fixtainer zcontainer ship_end">
+	<div class="tit">活动路演</div>
+	<div class='bod'>
+		{% for data in ly.data.rows %}
+		<div class='item'>
+			<img src="../resource/home/images/ib2.png" alt="">
+			<p class='mtit'>{{data.title}}</p>
+			<p><i class="material-icons">alarm</i>{{data.create_at}}  14:00-17:00</p>
+			<p><i class="material-icons">place</i>{{data.addr}}</p>
+			<div class="mmtit">
+				<img src="../resource/home/images/ib2.png" alt="">
+				<p>中国奥秘科技股份有限公司</p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+
+{% include 'front/footer.html' %}
+	
+	<script src="../resource/home/js/jquery-1.11.3.min.js"></script>
+
+	<script src="../resource/home/js/bootstrap.min.js"></script>
+	<script src="../resource/home/js/jquery.SuperSlide.js"></script>
+	<script>
+		jQuery(".slideBox").slide({mainCell:".bd ul",effect:"fold",autoPlay:true,delayTime:1000});
+	</script>
+</body>
+</html>

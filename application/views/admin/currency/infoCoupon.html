@@ -1,0 +1,90 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '优惠券名称',val: 'name'},
+						{name: '优惠券金额',val: 'amount'},
+						{name: '优惠码',val: 'coupon_no',w:'500'},
+						{name: '优惠券有效期开始时间',val: 'start_time',w:'500'},
+						{name: '优惠券有效期结束时间',val: 'end_time',w:'500'},
+						{name: '产品的源id',val: 'sid'},
+						{name: '分类id',val: 'cateid'},
+						{name: '标签',val: 'tag'},
+						{name: '分配给了那个用户',val: 'uid'},
+						{name: '是否使用了',val: 'is_use'},
+						{name: '是否领取',val: 'is_get'},
+						{name: '优惠券类型',val: 'type',select:'true'},
+						{name: '红包领取后有效期',val: 'expired_day'},
+						{name: '订单满多少钱可以使用该优惠券',val: 'limit_amount',w:'500'},
+						{name: '对应的订单编号',val: 'ordercode'},
+						{name: '配置表的id',val: 'cfg_id'},
+						{name: '获取类型',val: 'reg_key'},
+						{name: '类型对应属性',val: 'reg_value'},
+						{name: '自定义红包来源ID',val: 'a_coupon_id',w:'400'},
+						{name: '支付的平台类型ID',val: 'use_platform',w:'400'},
+						{name: '生效状态',val: 'is_active',select:'true'},
+						{name: '创建时间',val: 'create_at',w:'300'},
+						{name: '更新时间',val: 'update_at',w:'300'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '{{base_url}}/admin/pm/Api_coupon/info',
+					method: "post",
+					data: {
+						filter : ""
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "is_use",
+								val: ['未使用', '已使用']
+							},{
+								name: "is_get",
+								val: ['未领取', '已领取']
+							},{
+								name: "is_active",
+								val: ['未生效', '已生效']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+
+

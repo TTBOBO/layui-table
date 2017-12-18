@@ -1,0 +1,67 @@
+/**全局css设置*/
+*{font-family:"微软雅黑","黑体",HELVETICA; }
+html, body {-ms-overflow-style: scrollbar;}
+body{width:100%;margin:0;padding:0;overflow-x:hidden !important;background:#f2f2f2 !important;}
+.inline-block{display:inline-block}
+a{text-decoration:none;}
+a:hover{text-decoration:none;cursor: pointer;}
+a:active{}
+em{font-style:normal}
+ul,ol,li{list-style:none;border:none;padding:0;margin:0;}
+img{border:0;vertical-align:middle}
+table{border-collapse:collapse;border-spacing:0}
+.cls{clear:both;}
+.clear::after{content:'';display:block;clear:both;}
+.global_shade{width:100%;height:100%;z-index:9000;background:rgba(0,0,0,0.1);position:fixed;top:0;left:0;} /*//全局遮罩层*/
+
+/** ------------------------------------------- 以上是css初始化 ------------------------------------------- **/
+#header{position:fixed;background:rgba(0,0,0,0.8)!important;height:70px;width:100%;z-index:1000;color:#fff !important;top:0;}
+.header-hover{background:rgba(0,0,0,0.8) !important;color:#fff !important;}
+#header section{width:1200px;height:inherit;margin:0 auto;position:relative;}
+.nav_logo{position:absolute;left:0;top:18px;}
+.nav_logo img{width:90%;}
+.nav_logo h3{font-size:15px;margin:0;position: absolute; width: 500px;top: 0;left:240px;}
+.nav_logo h4{font-size:13px;margin:0;position: absolute; width: 500px;bottom: 0;left:240px;}
+.nav-tag{position:absolute;right:0;top:5px;font-size:12px;}
+.nav-tag ul li{float:left;padding:0 0 0 30px;display:inline-block;}
+.nav-tag-pad{padding:0 8px;}
+.nav-link{position:absolute;right:0;bottom:5px;}
+.nav-link ul li{float:left;padding:0 0 0 30px;display:inline-block;font-size:15px;font-weight:bold;}
+.nav-link a,.nav-tag a{color:#DADADA;}
+.nav-link a:hover,.nav-tag a:hover{color:#4373F9;border-bottom: 1px #4373F9 solid;padding-bottom: 4px;}
+.langular { display: none; position: absolute;opacity: 0; width: 93px; left: -1px; top: 24px;background: #fff; color: #000; opacity: 1; padding: 5px;border-radius: 2px; z-index: 1000;}
+.langular li{ padding-left: 25px !important; cursor: pointer;}
+#lang:hover .langular{
+	display: inline-block;
+}
+
+/* 全局footer */
+.footer{width:100%;background: #000833;padding-top: 79px;}
+.footer .footerCon{width:1200px;margin:0 auto;padding-bottom: 40px;}
+.footer .footerCon .footer_lInfo{float: left;color: #fff;}
+.footer .footerCon .footer_lInfo .flogo{width: 242px;height: 40px;margin-bottom: 49px;}
+.footer .footerCon .footer_lInfo .flogo img{display: block;width: 100%;height: 100%;}
+.footer .footerCon .footer_lInfo p{color:#cdcdcd;font-size: 14px;margin-bottom: 4px;}
+.footer .footerCon .footer_lInfo .callNum{font-size: 28px;margin-bottom: 17px;}
+.footer .footerCon .footer_lInfo .callNum p{margin: 0;}
+.footer .footerCon .fcontItems{margin-left:100px;float:left;}
+.footer .footerCon .fcontItems ul{float: left;margin-right: 44px;}
+.footer .footerCon .fcontItems ul li span{font-size: 20px;color: #f5f5f5;padding-bottom: 14px;display: block;}
+.footerCon .fcontItems ul li{margin-bottom: 8px;}
+.footerCon .fcontItems ul li a{color: rgba(245, 245, 245, 0.8);font-size: 14px;}
+.footerCon .fcontItems div{border-bottom:1px #999 solid;margin-bottom: 10px;}
+.footerCon .fcontItems p{color:rgba(245, 245, 245, 0.6);font-size: 12px;}
+.footerCon .footer_rInfo{float: right;}
+.footerCon .footer_rInfo .app_qr{display: inline-block;}
+.footerCon .footer_rInfo .app_qr div{width: 140px;height: 140px;}
+.footerCon .footer_rInfo .app_qr div img{display: block;width: 100%;height: 100%;}
+.footerCon .footer_rInfo .app_qr p{font-size: 14px;color:rgba(245, 245, 245, 0.8);text-align: center; }
+.footerCon .footer_rInfo .weChat_qr{display: inline-block;margin-left: 20px;}
+.footerCon .footer_rInfo .weChat_qr div{width: 140px;height: 140px;}
+.footerCon .footer_rInfo .weChat_qr div img{display: block;width: 100%;height: 100%;}
+.footerCon .footer_rInfo .weChat_qr p{font-size: 14px;color:rgba(245, 245, 245, 0.8); text-align: center;}
+.footer .footer_bottomInf{background: #000;padding: 20px 0;}
+.footer .footer_bottomInf p{text-align: center;font-size: 12px;color:rgba(248, 248, 248, 0.6) }
+.footer .footer_bottomInf ul{width: 421px;margin: 0 auto;}
+.footer .footer_bottomInf ul li{width:73px;height: 27px;float: left;margin-right: 14px;}
+.footer .footer_bottomInf ul li img{display: block;width: 100%;height: 100%;}

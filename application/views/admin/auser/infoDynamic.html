@@ -1,0 +1,66 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '姓名',val: 'name'},
+						{name: '头像',val: 'avatar'},
+						{name: '职位称呼',val: 'job_title'},
+						{name: '公司名称',val: 'company_name',w:300},
+						{name: '手机号',val: 'mobile',w:300},
+						{name: '联系电话',val: 'phone',w:300},
+						{name: '电子邮箱',val: 'email',w:300},
+						{name: 'QQ号码',val: 'qq',w:300},
+						{name: '微信',val: 'weixin',w:300},
+						{name: '地址',val: 'addr',w:300},
+						{name: '创建时间',val: 'create_at',w:300}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/am/Api_contacts_dynamics/info',
+					method: "post",
+					data: {
+						filter : "id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,303 @@
+<style>
+	.onh:hover
+	{
+		background: #fff;
+		box-shadow: 0 1px 8px 4px #eee;
+	}
+
+	.global-titInfo span {
+		font-size: 28px;
+  		line-height: 1.61;
+  		color: #ff8533;
+	}
+	.more2 a span {
+	border-radius: 10px;
+	background-color: #fff;
+	border: solid 1px #ff6600;
+	padding:16px 40px;
+	font-size: 16px;
+	 color: #ff6600;
+		 
+	}
+	.add5 a{
+		color: #ff6600;
+	}
+</style>
+<div class="virtual-vip clear" >
+	<div class="global-cont">
+		<div class="global-tit">
+			<h3>{{qwt_title}}</h3>
+		</div>
+		<!--{{qwt_title2}}-->
+		<p class="global-titInfo">
+			可享受全国34个省份<span>所有</span>已布局及将布局城市的服务
+		</p>
+
+		<ul class="city clear">
+			{% for key,item in qwt_img %}
+				<li class="onh">
+					<div class="city2" hidden>
+						<div class="image-a"><img src="{{item['path2']}}" alt=""></div>
+						<p class="city3">{{item['title']}}</p>
+						<p class="city4">{{item['title2']}}</p>
+					</div>
+					<div class="c1">
+						<p class="city1"><img src="{{item['path']}}" alt=""></p>
+						<span>{{item['title']}}</span>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+		<p class="title2">加入会员可获资源</p>
+
+		<div class="vip">
+			{% for key,item in qwt %}
+				<div>
+					<p>{{item['num']}}</p>
+					{{item['title']}}
+				</div>
+			{% endfor %}
+		</div>
+
+		<p class="add">赠送项目</p>
+
+		<div class="add1">
+			<div class="add2">
+				<ul>
+					{% for key,item in qwt_give %}
+					<li><i></i>{{item['name']}}<span> {{item['num']}} </span>{{item['company']}}</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="add3">
+				<div class="add4">{{consult}}</div>
+				<div class="add5"><a href="/Hmtong/hmtQWTDetails"><span>注册购买</span></a></div>
+				<div class="add6">咨询服务电话：<span>{{tel}}</span></div>
+			</div>
+
+		</div>
+
+		<div class="shenz-cont">
+			<div class="shenz-tit">
+				<h3>{{szt_title}}</h3>
+			</div>
+			<!--{{szt_title2}}-->
+			<p class="global-titInfo">
+				可享受全国34个省份<span>所有</span>已布局及将布局城市如下全部服务，且享受<span>实体</span>消费折扣优惠
+			</p>
+			<ul class="city-a clear">
+				{% for key,item in szt_img %}
+				<li  class="onh">
+					<div class="city2" hidden>
+						<div class="image-a"><img src="{{item['path2']}}" alt=""></div>
+						<p class="city3">{{item['title']}}</p>
+						<p class="city4">{{item['title2']}}</p>
+					</div>
+					<div class="c1">
+						<p class="city1"><img  src="{{item['path']}}" alt=""></p>
+						<span>{{item['title']}}</span>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+			<p class="title2">加入会员可获资源</p>
+
+			<div class="vip">
+				{% for key,item in szt %}
+				<div>
+					<p>{{item['num']}}</p>
+					{{item['title']}}
+				</div>
+				{% endfor %}
+			</div>
+			<div class="table">
+				<ul>
+					<li>
+						<div class="table1">套餐类型</div>
+						<div class="table2">套餐金额</div>
+						<div class="table2">所有项目单价</div>
+						<div class="table4">赠送项目</div>
+						<div class="table5">经理使用券</div>
+						<div class="table5">会议室使用券</div>
+						<div class="table5">会客室使用券</div>
+						<div class="table5-a">每消费一元积一分<br /><p>（积分可用于实体消费）</p></div>
+						<div class="table5">获取平台海量资源权限</div>
+						<div class="table2">赠送总额</div>
+					</li>
+					{% for key,item in szt_tc %}
+					<li class="ccc onh">
+						<div class="table1">{{item['type']}}</div>
+						<div class="table2-a">￥{{item['money']}}</div>
+						<div class="table3"><span>{{item['discount']}}</span>折</div>
+						<div class="table4">{{item['give']}}</div>
+						<div class="table5"><span>{{item['use_jls']}}</span>张</div>
+						<div class="table5"><span>{{item['use_hys']}}</span>小时</div>
+						<div class="table5"><span>{{item['use_hks']}}</span>小时</div>
+						<div style="padding-top: 16px" class="table5-a">{{item['integral'] ? '<img width="20px" src="/resource/front/images/correct.png" alt="">' :''}}</div>
+						<div class="table5">{{item['get_res'] ? '<img width="20px" src="/resource/front/images/correct.png" alt="">' :'' }}</div>
+						<div class="table3"><span>¥ {{item['gift_amount']}}</span></div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="joinvip">
+
+				<div class="more">
+					<div class="more1">{{consult}}</div>
+					<div class="more2"><a href="/Hmtong/hmtSZTDetails"><span>查看详情</span></a></div>
+					<div class="add6" style="float:right; clear:none; padding-top:23px;">咨询服务电话：<span>{{tel}}</span></div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="ddt-cont">
+			<div class="ddt-tit">
+				<h3>{{ddt_title}}</h3>
+			</div>
+			<!--{{ddt_title2}}-->
+			<p class="global-titInfo">
+				可享受全国34个省份<span>所有</span>已布局及将布局城市如下全部服务，且享受<span>实体</span>消费折扣优惠
+			</p>
+			<ul class="city-a clear">
+				{% for key,item in szt_img %}
+				<li  class="onh">
+					<div class="city2" hidden>
+						<div class="image-a"><img src="{{item['path2']}}" alt=""></div>
+						<p class="city3">{{item['title']}}</p>
+						<p class="city4">{{item['title2']}}</p>
+					</div>
+					<div class="c1">
+						<p class="city1"><img  src="{{item['path']}}" alt=""></p>
+						<span>{{item['title']}}</span>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+
+			<p class="title2">加入会员可获资源</p>
+
+			<div class="vip">
+				{% for key,item in ddt %}
+				<div>
+					<p>{{item['num']}}</p>
+					{{item['title']}}
+				</div>
+				{% endfor %}
+			</div>
+			<div class="yyg-table">
+				<ul>
+					<li>
+						<div class="yyg-table1">套餐类型</div>
+						<div class="table4-a">赠送项目</div>
+						<div class="table5">经理使用券</div>
+						<div class="table5">会议室使用券</div>
+						<div class="table5">会客室使用券</div>
+						<div class="table5-a">每消费一元积一分<br /><p>（积分可用于实体消费）</p></div>
+						<div class="table5">获取平台海量资源权限</div>
+					</li>
+					{% for key,item in ddt_tc %}
+						<li class="onh">
+							<div class="yyg-table1 yyg-table2">¥{{item['full_amount']}}</div>
+							<div class="table4"></div>
+							<div class="table5"><span>{{item['use_jls']}}</span>张</div>
+							<div class="table5"><span>{{item['use_hys']}}</span>小时</div>
+							<div class="table5"><span>{{item['use_hks']}}</span>小时</div>
+							<div style="padding-top: 16px" class="table5-a">{{item['integral'] ? '<img width="20px" src="/resource/front/images/correct.png" alt="">' :''}}</div>
+							<div class="table5">{{item['get_res'] ? '<img width="20px" src="/resource/front/images/correct.png" alt="">' :'' }}</div>
+						</li>
+					{% endfor %}
+
+				</ul>
+			</div>
+
+			<div class="more">
+				<div class="more1">{{consult}}</div>
+				<div class="more2"><a href="/Hmtong/hmtDDTDetails"><span>查看详情</span></a></div>
+				<div class="add6" style="float:right; clear:none; padding-top:23px;">咨询服务电话：<span>{{tel}}</span></div>
+			</div>
+
+		</div>
+
+
+		<div class="yixt-cont">
+			<div class="yixt-tit">
+				<h3>{{yxt_title}}</h3>
+			</div>
+			<p class="global-titInfo">{{yxt_title2}}</p>
+
+				<ul class="city-a clear">
+					{% for key,item in yxt_img %}
+					<div>
+						<li class="onh">
+							<div class="city2" hidden>
+								<div class="image-a"><img src="{{item['path2']}}" alt=""></div>
+								<p class="city3">{{item['title']}}</p>
+								<p class="city4">{{item['title2']}}</p>
+							</div>
+							<div class="c1">
+								<p class="city1"><img src="{{item['path']}}"></p>
+								<span>{{item['title']}}</span>
+							</div>
+						</li>
+					</div>
+					{% endfor %}
+
+				</ul>
+
+			<p class="title2">加入会员可获资源</p>
+
+			<div class="vip">
+				{% for key,item in yxt %}
+				<div>
+					<p>{{item['num']}}</p>
+					{{item['title']}}
+				</div>
+				{% endfor %}
+			</div>
+
+			<p class="add">赠送项目</p>
+
+			<div class="add1">
+				<div class="add2">
+					<ul>
+						{% for key,item in yxt_give %}
+						<li><i></i>{{item['name']}}<span> {{item['num']}} </span>{{item['company']}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+				<div class="add3">
+					<div class="add4">{{consult}}</div>
+					<div class="add5"><a>注册购买</a></div>
+					<div class="add6">咨询服务电话：<span>{{tel}}</span></div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="contact-cont">
+			<p class="contacttit">亲，以上没有符合您需求的，可提交您的需求，我们可以自定义为您提供服务！<br/> 或电联我们<span>{{tel}}</span></p>
+			<ul >
+				<li style="height:160px;margin-bottom: 30px;padding-left: 86px "><i style="top:18px;left: 30px;"><img src="/resource/front/images/pencil.png" alt=""></i><textarea placeholder="填写您的需求。"></textarea></li>
+				<li style="margin-bottom:20px;"><i style="top:18px;left: 34px;"><img src="/resource/front/images/acct.png" alt=""></i><input type="text" placeholder="联系人"></li>
+				<li style="margin-bottom:41px;"><i style="top:14px;left: 39px;"><img src="/resource/front/images/phone.png" alt=""></i><input type="text" placeholder="联系电话"></li>
+
+			</ul>
+			<div id="subBt">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(function () {
+        $("li.onh").hover(function(){
+        $(this).find('.city2').show();
+		$(this).find('.c1').hide();
+	},function(){
+		$(this).find('.city2').hide();
+		$(this).find('.c1').show();
+	});
+
+    })
+</script>

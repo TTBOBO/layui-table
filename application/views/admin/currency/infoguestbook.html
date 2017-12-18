@@ -1,0 +1,83 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '主题',val: 'name'},
+						{name: '留言者名字',val: 'contact_name'},
+						{name: '留言人电子邮箱',val: 'email',w:'300'},
+						{name: '留言人电话',val: 'mobile',w:'300'},
+						{name: '留言人qq',val: 'qq',w:'300'},
+						{name: '留言人地址',val: 'addr'},
+						{name: '内容',val: 'content'},
+						{name: 'ip地址',val: 'ip'},
+						{name: '是否审核',val: 'ischeck',select:'true'},
+						{name: '是否显示',val: 'is_show',select:'true'},
+						{name: '是否读过',val: 'is_read',select:'true'},
+						{name: '回复人的ID',val: 'reply_id'},
+						{name: '备注',val: 'remark'},
+						{name: '创建时间',val: 'create_at',w:'300'},
+						{name: '更新时间',val: 'update_at',w:'300'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '{{base_url}}/admin/pm/Api_guestbook/info',
+					method: "post",
+					data: {
+						filter : ""
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "ischeck",
+								val: ['是', '否']
+							},{
+								name: "is_show",
+								val: ['未显示', '以显示']
+							},{
+								name: "is_read",
+								val: ['未读', '已读']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+
+
+

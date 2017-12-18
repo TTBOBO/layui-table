@@ -1,0 +1,76 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '编号',val: 'region_id'},
+						{name: '省市区（县）代号',val: 'region_code'},
+						{name: '省市区（县）名称',val: 'region_name'},
+						{name: '父级id',val: 'parent_id'},
+						{name: '省市区(县)级别',val: 'region_level'},
+						{name: '排序',val: 'region_order'},
+						{name: '英文名称',val: 'region_name_en'},
+						{name: '英文简写',val: 'region_shortname_en'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '{{base_url}}/admin/pm/Api_pm_region1/info',
+					method: "post",
+					data: {
+						filter : ""
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "cate_id",
+								val: ['公司新闻', '行业新闻','商机动态', '投资百科','融资百科', '资金百科','担保百科']
+							},{
+								name: "is_show",
+								val: ['不显示', '显示']
+							},{
+								name: "is_recommend",
+								val: ['不推荐', '推荐']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+
+
+

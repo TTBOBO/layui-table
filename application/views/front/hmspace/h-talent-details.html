@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<title>海脉空间 - {{title.title}}</title>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<title></title>
+	<link rel="stylesheet" href="../resource/home/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../resource/home/fonts/material-icons.css">
+	<link rel="stylesheet" href="../resource/home/css/ioffice.css">
+	<link rel="stylesheet" href="../resource/home/css/tyle.css">
+</head>
+<body style="background-color: #f9f9f9;">
+{% include 'front/h_header.html' %}
+	<div class="container1200">
+		<div class="h-td-breadcrumbs">
+			<a href="">海脉汇 </a>><a href=""> 渠速拓 </a>><a href=""> 人才库 </a> > 欧阳珍
+		</div>
+		<div class="h-oyz-top">
+			<img src="../resource/home/images/htd-t1.png">
+			<div class="h-oyz-card hoyzcard">
+				<img src="../resource/home/images/{{details.data.avatar}}">
+				<div class="h-oyzinfo">
+					<p class="h-oyz-name">{{details.data.username}}</p>
+					<p class="h-oyz-com">{{details.data.position}}-{{details.data.company_name}}有限公司</p>
+					<p class="h-oyz-dz">中国-{{details.data.city_name}}</p>
+					<ul class="h-oyz-ul">
+						<li>{{details.data.label}}</li>
+
+					</ul>
+				</div>
+			</div>
+			<button class="btn btn-default" type="submit">联系她</button>
+		</div>
+		<div class="h-oyz-lvl">
+			<p class="h-oyz-lvl_title">个人履历</p>
+			<div class="h-oyz-lvl_hr"></div>
+			<div class="h-oyz-part">
+				<i class="material-icons">school</i><span>教育背景</span>
+				<p class="h-oyz-part_sj">{{details.data.education_info}}</p>
+				<div class="h-oyz-part_hr"></div>
+			</div>
+			<div class="h-oyz-part">
+				<i class="material-icons">work</i><span>工作经验</span>
+				<p class="h-oyz-part_sj">{{details.data.work_info}}</p>
+				<div class="h-oyz-part_hr"></div>
+			</div>
+			<div class="h-oyz-part">
+				<i class="material-icons">description</i><span>项目经验</span>
+				<p class="h-oyz-part_sj">{{details.data.project_info}}</p>
+
+				<div class="h-oyz-part_hr"></div>
+
+			</div>
+			<div class="h-oyz-part">
+				<i class="material-icons">grade</i><span>获奖情况</span>
+				<p class="h-oyz-part_sj">{{details.data.haswin_info}}</p>
+
+			</div>
+		</div>
+
+		<div class="h-oyz-xgrc">
+			<p class="h-oyz-xgrc_title">相关人才</p>
+			<div class="h-oyz-xgpart_hr"></div>
+			<div class="h-oyz-xgpart">
+				<img src="./images/htd-t2.png">
+				<div class="h-oyz-xgpart_right">
+					<p class="h-oyz-xgpart_name">蔡苏梅</p>
+					<p>区域总监-神话集团责任有限公司</p>
+					<p>中国-上海</p>
+					<ul class="h-oyz-xgrc_ul">
+						<li>资源</li>
+						<li>技术</li>
+						<li>效率</li>
+					</ul>
+				</div>
+			</div>
+			<div class="h-oyz-xgpart_hr" style="margin-top: 60px;"></div>
+			<div class="h-oyz-xgpart">
+				<img src="./images/htd-t2.png">
+				<div class="h-oyz-xgpart_right">
+					<p class="h-oyz-xgpart_name">汤楠</p>
+					<p>区域总监-神话集团责任有限公司</p>
+					<p>中国-上海</p>
+					<ul class="h-oyz-xgrc_ul">
+						<li>资源</li>
+						<li>技术</li>
+						<li>效率</li>
+					</ul>
+				</div>
+			</div>
+			<div class="h-oyz-xgpart_hr" style="margin-top: 60px;"></div>
+			<div class="h-oyz-xgpart">
+				<img src="./images/htd-t2.png">
+				<div class="h-oyz-xgpart_right">
+					<p class="h-oyz-xgpart_name">汤楠</p>
+					<p>区域总监-神话集团责任有限公司</p>
+					<p>中国-上海</p>
+					<ul class="h-oyz-xgrc_ul">
+						<li>资源</li>
+						<li>技术</li>
+						<li>效率</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+    <div class="rightfix">
+        <div class="online">
+            <a href="javascript:;"><img src="../resource/home/images/online.png" alt="">在线咨询</a>
+        </div>
+        <div class="fixmenu">
+            <ul>
+                <li><a href="javascript:;"><img src="../resource/home/images/trolley.png" alt=""></a></li>
+                <li><a href="javascript:;"><img src="../resource/home/images/phone.png" alt=""></a></li>
+                <li><a href="javascript:;"><img src="../resource/home/images/weixin.png" alt=""></a></li>
+                <li><a href="javascript:;"><img src="../resource/home/images/weibo.png" alt=""></a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% include 'front/footer.html' %}
+
+    <script src="../resource/home/js/jquery-1.11.3.min.js"></script>
+    <script src="../resource/home/js/bootstrap.min.js"></script>
+    <script src="../resource/home/js/jquery.SuperSlide.js"></script>
+	<script>
+		// jQuery(".slideBox").slide({mainCell:".bd ul",effect:"fold",autoPlay:true,delayTime:1000});
+	</script>
+</body>
+</html>

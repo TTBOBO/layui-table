@@ -1,0 +1,75 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [
+						{name: '店铺ID',val: 'im_shop.shop_id'},
+						{name: '店铺名称',val: 'im_shop.name'},
+						{name: '店铺介绍',val: 'im_shop.description'},
+						{name: '店铺主图',val: 'im_shop.thumb'},
+						{name: '店铺图片',val: 'im_shop.pics',type:'img'},
+						{name: '店铺地址-省',val: 'im_shop.prov'},
+						{name: '店铺地址-市',val: 'im_shop.city'},
+						{name: '店铺地址-区',val: 'im_shop.dist'},
+						{name: '店铺地址-街道地址',val: 'im_shop.street'},
+						{name: '楼盘名称',val: 'im_shop.eatate_name'},
+						{name: '提供服务列表',val: 'im_shop.provide_services'},
+						{name: '中心配置',val: 'im_shop.central_matching'},
+						{name: '周边设施',val: 'im_shop.nearby_facilities'},
+						{name: '周边服务',val: 'im_shop.nearby_service'},
+						{name: '楼盘的平面图',val: 'im_shop.floor_pics'},
+						{name: '入驻企业ID',val: 'im_shop.company_ids'},
+						{name: '关联产品ID',val: 'im_shop.product_ids'},
+						{name: '创建人ID',val: 'um_user.id'},
+						{name: '创建时间',val: 'im_shop.create_at',w:300}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/im/api_shop/info',
+					method: "post",
+					data: {
+						filter : "im_shop.shop_id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data
+						});
+					} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>
+
+

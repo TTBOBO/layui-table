@@ -1,0 +1,27 @@
+<?php
+
+/*
+ * 描述TODO
+ * @author:jacky Version 1.0.0 2017-11-24
+ */
+
+/*
+ * 文章管理
+ * @author:jacky Version 1.0.0 2016-6-12
+ */
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH . '/controllers/admin/Apibase.php';
+
+/**
+ * test
+ */
+class Api_product_type extends Apibase {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('cp/cp_type', 'model');
+    }
+
+}

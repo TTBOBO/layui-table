@@ -1,0 +1,120 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				<!--<div class="layui-form-item">
+					<label class="layui-form-label">名称:</label>
+					<label class="layui-form-label label_value" data-info="name">2274580253@qq.com</label>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">图标地址:</label>
+					<div class="layui-input-block">
+						<div class="layui-upload">
+							<div class="layui-upload-list">
+								<img class="layui-upload-img" src="/resource/admin/image/avatar.png" data-info="icon" data-type="img" id="demo1">
+								<p id="demoText"></p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">标题简介:</label>
+					<label class="layui-form-label label_value" data-info="title">广东深圳</label>
+
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">服务内容:</label>
+					<label class="layui-form-label label_value" data-info="content"></label>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">图片地址:</label>
+					<div class="layui-input-block">
+						<div class="layui-upload">
+							<div class="layui-upload-list">
+								<img class="layui-upload-img" src="/resource/admin/image/avatar.png" data-info="pics" data-type="img" id="demo1">
+								<p id="demoText"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">类型:</label>
+					<label class="layui-form-label label_value" data-arr=true data-info="type"></label>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">是否限制次数:</label>
+					<label class="layui-form-label label_value" data-arr=true data-info="is_limit_num"></label>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">创建时间:</label>
+					<label class="layui-form-label label_value" data-info="create_at">张三</label>
+				</div>-->
+			</form>
+		</div>
+	</div>
+</div>
+<script src="/resource/admin/layui/layui.js"></script>
+<script src="/resource/admin/js/jslib/ykp.js"></script>
+<script src="/resource/admin/js/jslib/public.js"></script>
+<!--<script src="/resource/admin/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>-->
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+					col: [{name: '名称',val: 'name'},
+						{name: '图标地址',type: 'img',val: 'icon'},
+						{name: '标题简介',val: 'title'},
+						{name: '服务内容',val: 'content'},
+						{name: '图片地址',type: 'img',val: 'pics'},
+						{name: '类型',val: 'type',select:true},
+						{name: '是否限制次数',val: 'is_limit_num',select:true},
+						{name: '创建时间',val: 'create_at'}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/api_product/info',
+					method: "post",
+					data: {
+						filter : "id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "type",
+								val: ['虚拟服务', '实体服务']
+							}, {
+								name: "is_limit_num",
+								val: ['不限制', '限制次数']
+							}]
+						}); //展示详情   具体实现方法请查看public.js
+					}
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>

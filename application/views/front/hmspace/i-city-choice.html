@@ -1,0 +1,70 @@
+{% include 'front/i_header.html' %}
+
+	<div class="icc-top">
+		<p><span>海脉空间· </span><span>IOFFICE </span><span>您企业发展的新助力</span></p>
+		<p>客户服务热线：400-822-3230</p>
+	</div>
+
+	<div class="icc-zs">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="icc-zs_zj">
+						<img src="../resource/home/images/1658.png" alt="">
+						<span class="">灵活移动办公</span>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="icc-zs_zj">
+						<img src="../resource/home/images/1660.png" alt="">
+						<span class="">渠道快速拓展</span>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="icc-zs_zj">
+						<img src="../resource/home/images/1659.png" alt="">
+						<span class="">品牌影响传播</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="icc-hr"></div>
+	<div class="icc-xz">
+		<div class="container">
+			<p class="icc-xz_rk">选择城市入口：</p>
+			
+			<ul class="icc-xz-ul">
+				{% for index, data in datacity.data %}
+					{% if loop.index < 16 %}  
+						<li><a href="">{{data.alias}}</a></li>
+					{% endif %}
+				{% endfor %}
+				<li><a href="">更多</a></li>
+			</ul>
+
+			<div class="icc-xz_search"><input type="text" placeholder="请输入城市"><a href=""><i class="material-icons">search</i></a></div>
+			<div class="row m-100">
+				{% for index, data in datacity.data %}
+					<div class="icc-cs_img"><a href=""><div class="icc-cs-hover"><p class="icc-cs-hwz">{{data.alias}}</p></div><img src="../resource/home/images/8801.jpg" alt=""></a></div>
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+
+	{% include 'front/footer.html' %}
+	<script src="../resource/home/js/jquery-1.11.3.min.js"></script>
+	<!-- <script src="../resource/home/js/jquery.pin.js"></script> -->
+	<script src="../resource/home/js/bootstrap.min.js"></script>
+	<script src="../resource/home/js/jquery.SuperSlide.js"></script>
+	<script>
+	jQuery(".slideBox").slide({mainCell:".bd ul",effect:"left",autoPlay:true,delayTime:1000});
+	jQuery(".nws").slide({effect:"fold",trigger:"click",delayTime:500});
+	</script>
+	<!-- <script>
+      $(".rightfix").pin({
+        containerSelector: ".container"
+        // padding: {top: 80}
+      })
+    </script> -->

@@ -1,0 +1,805 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {
+		margin: 10px;
+	}
+	
+	.demo-carousel {
+		height: 200px;
+		line-height: 200px;
+		text-align: center;
+	}
+	
+	.layui-table-view .layui-table {
+		width: 100%
+	}
+	
+	.model {
+		padding: 20px;
+	}
+	
+	.layui-upload-img {
+		width: 100px;
+		height: 100px;
+		border: 1px solid transparent;
+	}
+	
+	.layui-form-label {
+		width: 86px;
+		padding: 9px 8px !important;
+	}
+	
+	.layui-form-item .layui-input-inline {
+		width: 135px;
+	}
+	
+	.layui-input-block {
+		margin-left: 116px;
+	}
+	
+	.layui-table-cell {
+		overflow: visible;
+	}
+	
+	table .layui-input,
+	.layui-select,
+	.layui-textarea {
+		height: 30px;
+	}
+	
+	.hidden {
+		display: none !important;
+	}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 100%px; padding-bottom: 30px;">
+	<blockquote class="layui-elem-quote">
+		基本信息
+	</blockquote>
+	<div class="layui-form-item">
+		<label class="layui-form-label">店铺名称</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">店铺介绍</label>
+		<div class="layui-input-inline">
+			<input type="text" name="username" lay-verify="" placeholder="请输入" autocomplete="off" class="layui-input">
+		</div>
+	</div>
+
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label">店铺图片</label>
+			<div class="layui-input-block">
+				<div class="layui-upload">
+					<div class="layui-upload-list" id="demo2"></div>
+					<button type="button" type="button" class="layui-btn" id="test2">上传图片</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<blockquote class="layui-elem-quote">
+		运营人员
+	</blockquote>
+	<div class="layui-form-item peoplegroup">
+		<div>
+			<div class="layui-inline">
+				<label class="layui-form-label">运营人员姓名</label>
+				<div class="layui-input-inline">
+					<input type="tel" name="phone" lay-verify="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">联系人电话</label>
+				<div class="layui-input-inline">
+					<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">联系人角色</label>
+				<div class="layui-input-inline">
+					<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">联系人邮箱</label>
+				<div class="layui-input-inline">
+					<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<button type="button" class="layui-btn addpeople layui-btn-sm"><i class="layui-icon"></i></button>
+		</div>
+	</div>
+	<blockquote class="layui-elem-quote">
+		店铺地址
+	</blockquote>
+	<div class="layui-form-item">
+		<label class="layui-form-label">店铺地址</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="请输入标题" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">坐标</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="请输入经度" class="layui-input">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="请输入纬度" class="layui-input">
+		</div>
+	</div>
+	<blockquote class="layui-elem-quote" style="padding: 8px;">
+		空间服务<button type="button" class="layui-btn layui-btn-sm addservice" style="margin-left: 50px;">添加服务</button>
+	</blockquote>
+
+	<div class="layui-form-item">
+		<label class="layui-form-label">平面图例</label>
+		<div id="lc">
+			<div id="" style="height: 200px;">
+				<div class="layui-input-inline">
+					<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="请输入楼层" class="lc layui-input">
+					<div class="layui-upload">
+						<div class="layui-upload-list">
+							<img class="layui-upload-img" id="suploadimg">
+							<p id="demoText"></p>
+						</div>
+						<div class="layui-btn-group">
+							<button type="button" type="button" class="layui-btn" id="supload">上传图片</button>
+						</div>
+					</div>
+				</div>
+
+				<button type="button" class="layui-btn layui-btn-sm addlc"><i class="layui-icon"></i></button>
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-collapse" lay-filter="test" style="margin-bottom: 50px;">
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">场地办公服务</h2>
+			<div class="layui-colla-content" id="serviceList">
+					
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-collapse" lay-filter="test" style="margin-bottom: 50px;">
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">虚拟办公服务</h2>
+
+			<div class="layui-colla-content" id="fictitiousService">
+				<button type="button" id="addXn" class="layui-btn layui-btn-sm" style="margin-left: 20px;">添加虚拟办公服务</button>
+				<hr />
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-collapse" lay-filter="test" style="margin-bottom: 50px;">
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">其他服务</h2>
+
+			<div class="layui-colla-content" id="otherService">
+				<button type="button" id="addOther" class="layui-btn layui-btn-sm" style="margin-left: 20px;">添加虚拟办公服务</button>
+				<hr />
+				
+			</div>
+		</div>
+	</div>
+
+	<blockquote class="layui-elem-quote">
+		中心配套
+	</blockquote>
+	<div class="layui-form-item">
+		<label class="layui-form-label">配套名称</label>
+		<div class="layui-input-inline" style="width: 700px;">
+			<div id="pt">
+				<button type="button" class="layui-btn la	yui-btn-sm" style="float: left; margin-right: 10px; position: relative;">配套名称<i class="fa fa-remove" style="position: absolute; right: 3px;"></i></button>
+			</div>
+			<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input ptlabel" style="width: 80px; float: left; margin-right: 10px;">
+			<button type="button" id="addPt" class="layui-btn layui-btn-sm" style="float: left;"><i class="layui-icon"></i></button>
+		</div>
+	</div>
+	<blockquote class="layui-elem-quote">
+		周边设施
+	</blockquote>
+	<div class="layui-form-item">
+		<label class="layui-form-label">设施名称</label>
+		<div class="layui-input-inline" style="width: 700px;">
+			<div id="labelGroup">
+				<button type="button" class="layui-btn layui-btn-sm labelBtn" style="float: left; margin-right: 10px;  position: relative;">设施名称<i class="fa fa-remove" style="position: absolute; right: 3px;"></i></button>
+			</div>
+
+			<input type="text" name="email" id="labelName" lay-verify="" autocomplete="off" class="layui-input " style="width: 80px; float: left; margin-right: 10px;">
+			<button type="button" id="addlabelGroup" class="layui-btn layui-btn-sm" style="float: left;"><i class="layui-icon"></i></button>
+		</div>
+	</div>
+
+	<blockquote class="layui-elem-quote" style="padding: 8px;">
+		入驻企业 <button type="button" class="layui-btn la	yui-btn-sm" id="get_cus" style=" margin-left: 10px;">获取入驻企业</button>
+	</blockquote>
+	<div id="">
+
+	</div>
+
+	<div class="layui-collapse" lay-filter="test">
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">点击展开入驻企业</h2>
+			<div class="layui-colla-content">
+				<table cellspacing="0" cellpadding="0" border="0" class="layui-table">
+					<thead>
+						<tr>
+							<!--<th data-field="logo">
+								<div class="layui-table-cell laytable-cell-1-logo"><span>logo</span></div>
+							</th>-->
+							<th data-field="company_name">
+								<div class="layui-table-cell laytable-cell-1-company_name"><span>公司名称</span></div>
+							</th>
+							<th data-field="sort">
+								<div class="layui-table-cell laytable-cell-1-sort"><span>排序</span></div>
+							</th>
+							<th data-field="show">
+								<div class="layui-table-cell laytable-cell-1-show"><span>是否展示</span></div>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="data-list">
+						<tr data-index="0" class="">
+
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<div id="service_group" style="display: none;">
+
+	</div>
+	<div class="layui-form-item" style="margin-top: 50px;">
+		<div class="layui-input-block">
+			<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+			<button type="reset" class="layui-btn layui-btn-primary">取消</button>
+		</div>
+	</div>
+</form>
+<script type="text/html" id="switchTpl">
+	<!-- 这里的 checked 的状态只是演示 -->
+	<input type="checkbox" name="show" value="<% d.show %>" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" <% d.show==1 ? 'checked' : false %>>
+</script>
+<!--<script src="/resource/admin/js/jslib/citys.js "></script>-->
+
+<script>
+	ykp.defineClass(['element', "jquery "], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom(it);
+		},
+		initFrom: function(it) {
+
+			hm.load(function(optionObj) {
+				var form = optionObj.form,
+					layer = optionObj.layer,
+					layedit = optionObj.layedit,
+					laydate = optionObj.laydate,
+					public = optionObj.public,
+					table = optionObj.table,
+					upload = optionObj.upload;
+				laytpl = optionObj.laytpl;
+				var num = 1,
+					serviceArr = [];
+				it.fictitiousService = ''; //虚拟服务存放
+				it.otherService = ''; //其他服务存放
+				it.lc = []; //楼层存放地
+				it.confirm = false;
+				it.serviceList = [];
+				form.render();
+
+				//多图片上传
+				upload.render({
+					elem: '#test2',
+					url: '/api/api_common/upload_file',
+					multiple: true,
+					done: function(res) {
+						//上传完毕
+						$('#demo2').append('<img src=" ' + res.data + ' " alt=" ' + res.data + ' " style="margin-right:10px;" class="layui-upload-img ">')
+					}
+				});
+
+				it.uploadRender({
+					el: "#supload",
+					imgEl: '#suploadimg'
+				}, upload)
+
+				upload.render();
+
+				//获取入驻公司
+				$('#get_cus').click(function() {
+					var result = public.getIframeParams(ykp.getSessionStorage('iframeId'));
+					it.get_cus(form, result);
+				})
+
+				//添加配套
+				$('#addPt').click(function() {
+					var content = '';
+					var val = $('.ptlabel').val();
+					if(!val) {
+						layer.msg('请输入再添加');
+					} else {
+						content = '<button type="button" class="layui-btn layui-btn-sm labelName" style="float: left; margin-right: 10px; position: relative;">' + val + '<i class="fa fa-remove" style="position: absolute; right: 3px;"></i></button>';
+						$('#pt').append(content);
+						$('.ptlabel').val('');
+						$('.fa-remove').click(function() {
+							$(this).parent().remove();
+						})
+					}
+				})
+
+				//添加设施
+				$('#addlabelGroup').click(function() {
+					var content = '';
+					var val = $('#labelName').val();
+					if(!val) {
+						layer.msg('请输入再添加');
+					} else {
+						content = '<button type="button" class="layui-btn layui-btn-sm labelBtn" style="float: left; margin-right: 10px; position: relative;">' + val + '<i class="fa fa-remove" style="position: absolute; right: 3px;"></i></button>';
+						$('#labelGroup').append(content);
+						$('#labelName').val('');
+						$('.fa-remove').click(function() {
+							$(this).parent().remove();
+						})
+					}
+				})
+
+				//添加人员
+				$('.addpeople').click(function() {
+					var content = `<div  >
+						<div class="layui-inline">
+							<label class="layui-form-label">运营人员姓名</label>
+							<div class="layui-input-inline">
+								<input type="tel" name="phone" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">联系人电话</label>
+							<div class="layui-input-inline">
+								<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">联系人角色</label>
+							<div class="layui-input-inline">
+								<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">联系人邮箱</label>
+							<div class="layui-input-inline">
+								<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<button type="button" class="layui-btn layui-btn-sm close"><i class="layui-icon">&#x1006;</i></button>
+					</div>`;
+					$('.peoplegroup').append(content);
+					form.render();
+					$('.close').unbind('click').click(function() {
+						$(this).parent().remove();
+					})
+				})
+
+				//添加虚拟办公服务
+				$('#addXn').click(function() {
+					$('#fictitiousService').append(`<div>
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 40px;">名称</label>
+							<div class="layui-input-inline" style="width: 100px;">
+								${it.fictitiousService}
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 40px;">单价</label>
+							<div class="layui-input-inline" style="width: 100px;">
+								<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 60px;">单位</label>
+							<div class="layui-input-inline" style="width: 100px;">
+								<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<button type="button" id="addOther" class="layui-btn layui-btn-sm closeOther" style="float: left;"><i class="layui-icon">&#x1006;</i></button>
+						</div>
+					</div>`);
+					form.render();
+
+					$('.closeOther').click(function() {
+						$(this).parent().parent().remove();
+					})
+				})
+
+				//添加其他服务
+				$('#addOther').click(function() {
+					$('#otherService').append(`<div>
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 40px;">名称</label>
+							<div class="layui-input-inline" style="width: 100px;">
+								${it.otherService}
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 40px;">单价</label>
+							<div class="layui-input-inline" style="width: 100px;">
+								<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label" style="width: 60px;">单位</label>
+							<div class="layui-input-inline" style="width: 100px;">
+								<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<button type="button" id="addOther" class="layui-btn layui-btn-sm closeOther" style="float: left;"><i class="layui-icon">&#x1006;</i></button>
+						</div>
+					</div>`);
+					form.render();
+					$('.closeOther').click(function() {
+						$(this).parent().parent().remove();
+					})
+				})
+
+				//添加楼层
+				$('.addlc').click(function() {
+					var content = `
+						<div id="" style="height: 200px;margin-left: 100px;">
+							<div class="layui-input-inline">
+								<input type="text" name="title" lay-verify=""  autocomplete="off" placeholder="请输入楼层" class="layui-input lc">
+								<div class="layui-upload">
+									<div class="layui-upload-list">
+										<img class="layui-upload-img" id="suploadimg${num}">
+										<p id="demoText"></p>
+									</div>
+									<div class="layui-btn-group">
+										<button type="button" type="button" class="layui-btn" id="supload${num}">上传图片</button>
+									</div>
+								</div>
+							</div>
+							<button type="button" class="layui-btn layui-btn-sm closeP"><i class="layui-icon">&#x1006;</i></button>
+						</div>`;
+					$('#lc').append(content);
+					$('.closeP').unbind('click').click(function() {
+						$(this).parent().remove();
+					})
+					it.uploadRender({
+						el: "#supload" + num,
+						imgEl: "#suploadimg" + num
+					}, upload)
+					num++;
+				})
+
+				//添加服务
+				$('.addservice').click(function() {
+					//添加服务需确认楼层
+					var status = false;
+					it.lc = [];
+					
+					$('.lc').each(function() {
+						if($(this).val()) {
+							it.lc.push(`<option value="${$(this).val()}">${$(this).val()}</option>`);
+							status = true;
+						} else {
+							status = false;
+							return false;
+						}
+					})
+					if(status) {
+						if(it.confirm) {
+							public.layerOpen({
+								el: $('#service_group'),
+								area: ['700px'],
+								title: "添加服务"
+							}, function() { //成功执行的回调
+								var el = $('#service_group').find("input:radio[name=im_station]:checked");
+								var index = el.attr('data-id');
+								var name = el.attr('data-name');
+								el.prev().hide(); //选择过不能选择
+								appendService(index, name);
+								var arr = [];
+								it.serviceList.forEach(function(item) {
+									if(item['im_station.id'] != index) {
+										delete item;
+										arr.push(item)
+									}
+								})
+								it.serviceList = arr;
+								it.initList(it.serviceList, form);
+								layer.closeAll();
+							}, function() { //取消执行的回调
+								layer.closeAll();
+							})
+						} else {
+							layer.confirm('平面图确认添加完才可以添加服务，确认后楼层不可修改', function(index) {
+								$('.addlc').remove();
+								$('.closeP').remove();
+								layer.closeAll();
+								public.layerOpen({
+									el: $('#service_group'),
+									area: ['700px'],
+									title: "添加服务"
+								}, function() { //成功执行的回调
+									it.confirm = true;
+									var el = $('#service_group').find("input:radio[name=im_station]:checked");
+									var index = el.attr('data-id');
+									var name = el.attr('data-name');
+									if(!index) {
+										layer.msg('请选择服务再添加');
+										return false;
+									}
+									//遍历服务节点
+									appendService(index, name);
+									//去除选中的服务
+									var arr = [];
+									it.serviceList.forEach(function(item) {
+										if(item['im_station.id'] != index) {
+											delete item;
+											arr.push(item)
+										}
+									})
+									it.serviceList = arr;
+									it.initList(it.serviceList, form);
+									layer.closeAll();
+
+								}, function() { //取消执行的回调
+									layer.closeAll();
+								})
+							});
+						}
+					} else {
+						console.log(it.lc)
+						layer.msg('楼层不能为空');
+						return false;
+					}
+				})
+
+				it.showGw(form, serviceArr, it, function(res) {
+					console.log(res)
+				});
+
+				//获取虚拟服务
+				it.getfictitiousService(it);
+				//获取其他服务
+				it.getOtherService(it);
+				
+				
+				//添加服务列表
+				function appendService(index, name) {
+					var btn = `<button type="button" class="layui-btn addpeople layui-btn-sm"><i class="layui-icon"></i></button>`;
+					var btn1 = `<button type="button" class="layui-btn layui-btn-sm closeS"><i class="layui-icon">&#x1006;</i></button>`;
+					var qdList = `<div class="layui-collapse" lay-accordion="">
+				        <div class="layui-colla-item">
+				          <h2 class="layui-colla-title">清单</h2>
+				          <div class="layui-colla-content">`;
+					var content = `<div >
+					<fieldset class="layui-elem-field layui-field-title">
+					  <legend>${name}</legend>
+					</fieldset>`;
+					var con = `<div><div class="layui-inline">
+						<label class="layui-form-label" style="width: 40px;">楼层</label>
+						<div class="layui-input-inline" style="width: 100px;">
+							<select>${it.lc.join('')}</select>
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label" style="width: 40px;">房号</label>
+						<div class="layui-input-inline" style="width: 100px;">
+							<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label" style="width: 40px;">单价</label>
+						<div class="layui-input-inline" style="width: 100px;">
+							<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label" style="width: 40px;">时间</label>
+						<div class="layui-input-inline" style="width: 100px;">
+							<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label" style="width: 40px;">位置</label>
+						<div class="layui-input-inline" style="width: 100px;">
+							<input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label" style="width: 40px;">规格</label>
+						<div class="layui-input-inline" style="width: 100px;">
+							<select>
+								<option value="">选择规格</option>
+								<option value="0">小</option>
+								<option value="1">中</option>
+								<option value="2">大</option>
+							</select>
+						</div>
+					</div>
+					    <div class="layui-input-inline">
+					      <input type="checkbox" name="list" lay-skin="primary" value="物品清单" title="物品清单">
+					    </div>
+				`;
+
+					$('#serviceList').append(content + con + btn +qdList +'</div></div></div></div>');
+
+					$('.addpeople').unbind('click').click(function() {
+						$(con + btn1 +qdList + '</div></div></div></div>').insertAfter($(this).parent());
+
+						form.render();
+						$('.closeS').click(function() {
+							$(this).parent().remove();
+						})
+					})
+					
+					
+					form.render();
+					
+					$('#serviceList').find("input[type=checkbox]").change(function() {
+						var statu = $(this).id(':checked');
+						alert(statu)
+					})
+				}
+			})
+
+		},
+
+		//添加服务
+		addservice: function(option) {
+
+		},
+
+		//获取工位
+		showGw: function(form, serviceArr, it, callback) {
+			ykp.doAjax({
+				url: "/admin/im/Api_station/grid",
+				method: "post",
+				data: {
+					limit: 100
+				},
+				success: function(res) {
+					var data = res.data.rows;
+					it.serviceList = data;
+					it.initList(data, form, callback);
+				}
+			})
+
+		},
+
+		getfictitiousService: function(it) {
+			ykp.doAjax({
+				url: "/admin/api_product/grid",
+				method: "post",
+				data: {
+					limit: 100,
+					filter: 'type = 0'
+				},
+				success: function(res) {
+					var data = res.data.rows;
+					var content = '<select>';
+					for(var i in data) {
+						content += `<option value="${data[i].name}">${data[i].name}</option>`
+					}
+					content += '</select>';
+					it.fictitiousService = content;
+				}
+			})
+		},
+		getOtherService: function(it) {
+			ykp.doAjax({
+				url: "/admin/api_product/grid",
+				method: "post",
+				data: {
+					limit: 100,
+					filter: 'type = 2'
+				},
+				success: function(res) {
+					var data = res.data.rows;
+					var content = '<select>';
+					for(var i in data) {
+						content += `<option value="${data[i].name}">${data[i].name}</option>`
+					}
+					content += '</select>';
+					it.otherService = content;
+				}
+			})
+		},
+
+		//遍历节点
+		initList: function(data, form, callback) {
+			var content = '';
+			var serviceArr = [];
+			content += '<div id="customList" style="background: #eee; padding: 10px;" class="model">' +
+				'<form class="layui-form layui-form-pane" id="autoColForm" style=" height: 100%; width: 100%;  display: flex;justify-content: start; flex-wrap: wrap">' +
+				'<div class="layui-form-item" pane="">' +
+				'<div class="" id="checkBoxGroup">';
+			for(var i = 0; i < data.length; i++) {
+				content += '<input type="radio" data-id = "' + data[i]['im_station.id'] + '" data-name="' + data[i]['im_station.name'] + '" name="im_station" lay-skin="primary" title="' + data[i]['im_station.name'] + '">'
+				serviceArr.push(data[i]['im_station.id']);
+			}
+			content += '</div></div></form></div>';
+			$('#service_group').html(content);
+
+			form.render();
+		},
+		//上传图片
+		uploadRender: function(option, upload) {
+			upload.render({
+				elem: option.el,
+				url: '/api/api_common/upload_file',
+				done: function(res) {
+					//上传完毕
+					$(option.imgEl).attr('src', res.data);
+				}
+			});
+		},
+
+		//获取入驻企业
+		get_cus: function(form, result) {
+
+			ykp.doAjax({
+				url: "/admin/im/api_shop/ru_custom",
+				method: "post",
+				data: {
+					id: result.id,
+					limit: '1000'
+				},
+				success: function(res) {
+					var data = res.data.rows;
+					var content = '';
+					if(data) {
+						for(var i = 0; i < data.length; i++) {
+							content += `
+								<tr><td data-field="company_name">
+									<div class="layui-table-cell laytable-cell-1-company_name">${data[i].company_name}</div>
+								</td>
+								<td data-field="sort">
+									<div class="layui-table-cell laytable-cell-1-sort">
+									<select class="sort">
+											<option value="1" ${data[i].sort == 1 ? "selected" : ""}>1</option>
+											<option value="2" ${data[i].sort == 2 ? "selected" : ""}>2</option>
+											<option value="3" ${data[i].sort == 3 ? "selected" : ""}>3</option>
+											<option value="4" ${data[i].sort == 4 ? "selected" : ""}>4</option>
+											<option value="5" ${data[i].sort == 5 ? "selected" : ""}>5</option>
+											<option value="6" ${data[i].sort == 6 ? "selected" : ""}>6</option>
+											<option value="7" ${data[i].sort == 7 ? "selected" : ""}>7</option>
+											<option value="8" ${data[i].sort == 8 ? "selected" : ""}>8</option>
+											<option value="9" ${data[i].sort == 9 ? "selected" : ""}>9</option>
+											<option value="10" ${data[i].sort == 10 ? "selected" : ""}>10</option>
+										</select>
+									</div>
+								</td>
+								<td data-field="show" data-content="1">
+									<div class="layui-table-cell laytable-cell-1-show">
+										<input type="checkbox" name="show" value="${data[i].show}" ${data[i].show == 1 ? "checked" : ""} lay-skin="switch" lay-text="否|是" lay-filter="sexDemo"
+										<div class="layui-unselect layui-form-switch" lay-skin="_switch"><i></i></div></div>
+								</td></tr>
+								`;
+						}
+						$('#data-list').html(content);
+						form.render();
+					} else {
+						layer.msg('还没有入驻企业');
+					}
+				}
+			})
+		}
+	});
+</script>
+</body>
+
+</html>

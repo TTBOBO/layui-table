@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>海脉空间 - {{title}}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="{{webinfo.keywords}}" />
+        <meta name="description" content="{{webinfo.description}}" />
+        <meta name="author" content="{{webinfo.author}}" />
+        <link rel="stylesheet" href="/resource/front/js/jslib/bootstrap-3.3.5/css/bootstrap.min.css" />
+        <script src="/resource/front/js/jquery.min.js"></script>
+        <link rel="stylesheet" href="/resource/front/css/base.css?v={{version}}">
+        <link rel="stylesheet" href="/resource/front/css/font-awesome.min.css">
+        <script type="text/javascript" src="/resource/front/js/jslib/jquery.min.js"></script>
+        <script type="text/javascript" src="/resource/front/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/resource/front/js/jslib/ykp.js"></script>
+    </head>
+    <body>
+        <div id="header" class="header" >
+            <section>
+                <div class="nav_logo inline-block">
+                    <div class="inline-block"><a href="/"><img src="{{webinfo.weblogo}}"></a></div>
+                    <div class="nav_text inline-block">
+                        <h3>全国连锁灵活式联合办公空间综合服务商</h3>
+                        <h4>400-822-3230</h4>
+                    </div>
+                </div>
+                <div class="nav-tag">
+                    <ul>
+                        <li><i class="glyphicon glyphicon-search" ></i></li>
+                        <li><a href="/home/checkCity"><i class="glyphicon glyphicon-map-marker" ></i> 深圳</a></li>
+                        <li style="position: relative; height: 43px; cursor: pointer;" id="lang"><span  class="lang">中文站</span> <i class="glyphicon glyphicon-menu-down"></i><ul class="langular"><li>中文站</li><li>English站</li></ul></li>
+                        <li><a href="/home/login">登陆</a><span class="nav-tag-pad">|</span><a href="/home/regist">注册</a></li>
+                    </ul>
+                </div>
+                <div class="nav-link">
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/hmtong">海脉通</a></li>
+                        <li><a href="/hm_ioffice">IOFFICE</a></li>
+                        <li><a href="/hmspace">海脉汇</a></li>
+                        <li><a href="/hm_qifubao">企服宝</a></li>
+                        <li><a href="/hm_rong">海脉融</a></li>
+                        <li><a href="/hm_zhong">海脉众包</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <script>
+        	$(function() {
+        		$('.langular li').click(function() {
+        			var text = $(this).text();
+        			$('.lang').text(text);
+        		})
+        	})
+        </script>

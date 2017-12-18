@@ -1,0 +1,86 @@
+{% include 'admin/iheader.html' %}
+<style>.layui-form-label {width: 100px !important;}</style>
+{% include 'admin/crumbs1.html' %}
+	<div class="layui-collapse" lay-filter="test">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">下拉查看详情</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form" action="" style="width: 700px; padding-bottom: 100px;">
+				
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+
+		initFrom: function() {
+			hm.load(function(option) {
+				var public = option.public;
+				var element = option.element;
+				public.showInfo({
+				col: [{name: '用户名称',val: 'um_user.username'},
+						{name: '公司类型',val: 'um_company.company_name',w:'300',select:true},
+						{name: '项目名称',val: 'um_program.name'},
+						{name: '项目主图',val: 'um_program.thumb',type:'img'},
+						{name: '项目图片',val: 'um_program.pics',type:'img'},
+						{name: '项目简介',val: 'um_program.descrption'},
+						{name: '项目内容',val: 'um_program.content'},
+						{name: '创建时间',val: 'um_program.create_at',w:'300'},
+						{name: '城市ID',val: 'um_program.city_ids'},
+						{name: '项目金额',val: 'um_program.need_amount',w:'500'},
+						{name: '所在股份',val: 'um_program.take_shares'},
+						{name: '融资阶段',val: 'um_program-programe.cate_id',select:true},
+						{name: '平台行业名称',val: 'um_program.platform_name'},
+						{name: '平台状态',val: 'um_program.platform_status',select:true},
+						{name: '推荐项目',val: 'um_program.recommend',select:true},
+						{name: '行业ID',val: 'um_program.industry_id'},
+						{name: '状态',val: 'um_program.status',select:true}
+					]
+				})
+				var result = public.getIframeParams(ykp.getSessionStorage('iframeId')); //获取当前iframe窗口的id值
+				ykp.doAjax({
+					url: '/admin/Api_program/info',
+					method: "post",
+					data: {
+						filter : "um_program.id=" + result.id
+					},
+					success: function(res) {
+						var data = res.data;
+						hm.showDetails({
+							el: ".layui-form",
+							data: data,
+							statuArr: [{
+								name: "company_id",
+								val: ['个人项目', '公司项目']
+							}, {
+								name: "programe_cate_id",
+								val: ['种子轮', '天使轮', 'P-A', 'A轮', 'A+轮', 'B轮','B+轮','C轮','D轮','E轮']
+							},{
+								name: "platform_status",
+								val: ['运营中', '已停运']
+							},{
+								name: "recommend",
+								val: ['否', '推荐']
+							},{
+								name: "status",
+								val: ['进行中', '已成功','已关闭']
+							}]
+						});
+						} //展示详情   具体实现方法请查看public.js
+				})
+				element.on('collapse(test)', function(data) {
+					console.log('展开状态：' + data.show);
+				});
+			});
+		},
+	});
+</script>
+</body>
+
+</html>

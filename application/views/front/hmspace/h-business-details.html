@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<title>海脉空间 - {{title}}</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title></title>
+    <link rel="stylesheet" href="../resource/home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resource/home/fonts/material-icons.css">
+    <link rel="stylesheet" href="../resource/home/css/ioffice.css">
+    <link rel="stylesheet" href="../resource/home/css/tyle.css"> </head>
+
+<body style="background-color: #f9f9f9;">
+{% include 'front/h_header.html' %}
+    <div class="container1200">
+        <div class="h-td-breadcrumbs"> <a href="/hmspace">海脉汇 </a>><a href="/hmspace/business"> 商机汇 </a> > 大疆无人机 </div>
+        <div class="hbd-banner">
+            <div class="ifods">
+                <div class="img-box"><img src="../resource/home/images/ifods.png" alt=""></div>
+                <div class="words">
+                    <p>大疆无人机招聘代理商</p>
+                    <p>UNMANNED AERIAL VEHICLE AGENTS</p>
+                </div>
+            </div> <img src="../resource/home/images/cover.png" alt="" class="ifods-bg"> </div>
+        <div class="hbd-tabsil">
+            <div class="hd">
+                <ul>
+                    <li class="on">产品详情</li>
+                    <li>盈利模式</li>
+                    <li>招商政策</li>
+                    <li>企业介绍</li>
+                    <li>在线留言</li>
+                </ul>
+            </div>
+            <div class="bd">
+                <div><img src="../resource/home/images/detail.png" alt=""></div>
+                <div>盈利模式<img src="../resource/home/images/870.png" alt=""></div>
+                <div>招商政策<img src="../resource/home/images/1137.png" alt=""></div>
+                <div>企业介绍<img src="../resource/home/images/sto-t3.png" alt=""></div>
+                <div>在线留言</div>
+            </div>
+        </div>
+        <div class="hbd-form">
+            <div class="img-box">
+                <div class="hbdinfo">
+                    <p class="bigone">大疆</p>
+                    <p class="smtwo">领略未来</p>
+                    <p class="xsthr">THE FUTURE OF POSSIBLE</p>
+                </div> <img src="../resource/home/images/fompic.png" alt="" class="hbdinfo-bg"> 
+            </div>
+            <div class="hbdfm- pull-right">
+            	<form action="/hmspace/message" method="post">
+            		<div class="igrp"><i class="h-i hbdfm1"></i>
+	                    <input type="text" name="contact_name" placeholder="姓名">
+	                </div>
+	                <div class="igrp"><i class="h-i hbdfm2"></i>
+	                    <input type="text" name="mobile" placeholder="手机">
+	                </div>
+	                <div class="igrp"><i class="h-i hbdfm3"></i>
+	                    <input type="text" name="email" placeholder="邮箱">
+	                </div>
+	                <div class="igrp"><i class="h-i hbdfm4"></i>
+	                    <input type="text" name="addr" placeholder="地址">
+	                </div>
+	                <div class="igrp"> <i class="h-i hbdfm5"></i>
+	                    <select class="selectpicker form-control">
+	                        <option style="display: none;" selected="selected" disabled="disabled">投资金额选择</option>
+	                        <option>10万 - 30万</option>
+	                        <option>30万 - 50万</option>
+	                        <option>50万以上</option>
+	                    </select>
+	                </div>
+	                <div class="igrp ta-igrp" tabindex="-1">
+	                    <div class="ta-show"><i class="h-i hbdfm6"></i>
+	                        <div class="ta-text" >留言内容</div>
+	                    </div>
+	                    <textarea name="content"></textarea>
+	                </div>
+	                <button type="button" class="hbdfm-submit"  onclick="this.form.submit()">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+            	</form>
+            </div>
+        </div>
+    </div>
+    <div class="rightfix">
+        <div class="online"> <a href="javascript:;"><img src="../resource/home/images/online.png" alt="">在线咨询</a> </div>
+        <div class="fixmenu">
+            <ul>
+                <li><a href="javascript:;"><img src="../resource/home/images/trolley.png" alt=""></a></li>
+                <li><a href="javascript:;"><img src="../resource/home/images/phone.png" alt=""></a></li>
+                <li><a href="javascript:;"><img src="../resource/home/images/weixin.png" alt=""></a></li>
+                <li><a href="javascript:;"><img src="../resource/home/images/weibo.png" alt=""></a></li>
+            </ul>
+        </div>
+    </div>
+{% include 'front/footer.html' %}
+    <script src="../resource/home/js/jquery-1.11.3.min.js"></script>
+    <script>
+//        $.ajax({
+//            url: "http://api.hm-space.yunkepai.net/pc_api/api_im_channel/list",
+//            type: "POST",
+//            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+//            cache: true,
+//            data: $('#formid').serializeArray(),
+//            success:function(data){
+//                alert("1111")
+//            }
+//        })
+    </script>
+    <script src="../resource/home/js/bootstrap.min.js"></script>
+    <script src="../resource/home/js/jquery.SuperSlide.js"></script>
+    <script>
+    jQuery(".hbd-tabsil").slide({ trigger: "click", delayTime: 700 });
+    </script>
+    <script>
+    $(function() { 
+    	$("body").focus(function(){
+    		alert("aa"); 
+    		$(this).find(".ta-show").hide(); 
+    		$(this).find("textarea").show().focus(); 
+    	}) 
+    	$("div.ta-igrp").focus(function(){
+    		$(this).find(".ta-show").hide(); 
+    		$(this).find("textarea").show().focus(); 
+    		event=event||window.event; 
+    		event.stopPropagation(); 
+    	}); 
+    	$(document).click(function(e){
+    		var text = $(this).find("textarea").val(); 
+    		if(text == ""){
+    			$(this).find(".ta-text").html("留言内容"); 
+    		}else{
+    			$(this).find(".ta-text").html(text); 
+    		} 
+    		$(this).find("textarea").hide(); 
+    		$(this).find(".ta-show").show().focus(); 
+    	}); 
+    })
+    </script>
+</body>
+
+</html>

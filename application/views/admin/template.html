@@ -1,0 +1,48 @@
+{% include 'admin/iheader.html' %}
+
+<body>
+	<style>
+		body {
+			margin: 10px;
+		}
+		
+		.demo-carousel {
+			height: 200px;
+			line-height: 200px;
+			text-align: center;
+		}
+		
+		.layui-table-view .layui-table {
+			width: 100%;
+		}
+		
+		.model {
+			padding: 20px;
+		}
+	</style>
+	{% include 'admin/crumbs.html' %}
+
+
+	<script src="/resource/admin/layui/layui.js"></script>
+	<script src="/resource/admin/js/jslib/ykp.js"></script>
+	<script src="/resource/admin/js/jslib/public.js"></script>
+	<!--<script src="/resource/admin/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>-->
+	<script>
+		ykp.defineClass(['element', "jquery"], {
+			init: function() {
+				var it = this;
+				//初始化列表
+				it.initFrom();
+			},
+
+			initFrom: function() {
+				layui.use(['form', 'layedit', 'laydate'], function() {
+					
+
+				});
+			}
+		});
+	</script>
+</body>
+
+</html>

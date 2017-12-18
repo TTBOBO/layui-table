@@ -1,0 +1,71 @@
+{% include 'admin/iheader.html' %}
+<style>
+	body {margin: 10px;}
+	.demo-carousel {height: 200px;line-height: 200px;text-align: center;}
+	.layui-table-view .layui-table {width: 100%}
+	.model {padding: 20px;}
+	.layui-upload-img {width: 100px;height: 100px;border: 1px solid transparent;}
+</style>
+{% include 'admin/crumbs1.html' %}
+<form class="layui-form" action="" style="width: 700px; padding-bottom: 30px;">
+</form>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initFrom();
+		},
+		initFrom: function() {
+			hm.showAddEdit({
+				el: ".layui-form",
+				list: [{type: "text",name: "id",display:true, field: "id"},
+					{type: "text",name: "优惠券名称",verify:"tel",field: "name"},
+					{type: "text",name: "优惠券金额",field: "amount"},
+					{type: "text",name: "优惠码",field: "coupon_no"},
+					{type: "time",name: "优惠券有效期开始时间",verify:"tel",field: "start_time"},
+					{type: "time",name: "优惠券有效期结束时间",field: "end_time"},
+					{type: "text",name: "产品的源id",field: "sid"},
+					{type: "text",name: "分类id",verify:"tel",field: "cateid"},
+					{type: "text",name: "标签",field: "tag"},
+					{type: "text",name: "分配给了那个用户",field: "uid"},
+					{type: "select",name: "是否使用了",verify:"tel",field: "is_use",sOption: {0: "未使用",1: "已经使用了"}},
+					{type: "select",name: "是否领取",field: "is_get",sOption: {0: "未领取",1: "已领取"}},
+					{type: "select",name: "优惠券类型",field: "type",sOption: {0: "无条件",1: "满多少钱可以使用该优惠券"}},
+					{type: "text",name: "红包领取后有效期",verify:"tel",field: "expired_day"},
+					{type: "text",name: "订单满多少钱可以使用该优惠券",field: "limit_amount"},
+					{type: "text",name: "对应的订单编号",field: "ordercode"},
+					{type: "text",name: "配置表的id",verify:"tel",field: "cfg_id"},
+					{type: "text",name: "获取类型",field: "reg_key"},
+					{type: "text",name: "类型对应属性",field: "reg_value"},
+					{type: "text",name: "自定义红包来源ID",field: "a_coupon_id"},
+					{type: "text",name: "支付的平台类型ID",field: "use_platform"},
+					{type: "select",name: "生效状态",verify:"tel",field: "is_active",sOption: {0: "未生效",1: "已生效"}},
+					{type: "text",name: "创建时间",field: "create_at"},
+					{type: "text",name: "更新时间",field: "update_at"}
+				],
+				selectKey:"id",   //列字段id   例: id, product_id
+//				verifyData:{
+//					option: [{
+//						verifyDate: "password"
+//					}, {
+//						verifyDate: "tel"
+//					},{
+//						verifyDate: "test",
+//						match:[/\d+\.\d+\.\d+\.\d+ /, '请填写正确的ip']
+//					}],
+//					el: ".layui-form"
+//				},  //检索  默认  ''  要检索时  添加检索
+				infoUrl:"/admin/pm/Api_coupon/info",   //编辑详情接口
+				addEditUrl:'/admin/pm/Api_coupon/update_or_add', //添加的接口 
+				prevUrl:'{{base_url}}/admin/currency/pm_coupon'   //添加成功返回的页面
+			});
+		},
+	});
+</script>
+</body>
+</html>
+
+
+
+

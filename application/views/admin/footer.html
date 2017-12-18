@@ -1,0 +1,66 @@
+</div>
+</div>
+<div class="layui-footer">
+	<!-- 底部固定区域 -->
+	© 海脉空间（深圳）有限公司 - 2016-2019
+</div>
+
+<script src="/resource/admin/layui/layui.js"></script>
+<script src="/resource/admin/js/jslib/ykp.js"></script>
+<script src="/resource/admin/js/jslib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script>
+	ykp.defineClass(['element'], {
+		init: function() {
+			var it = this;
+			it.getDefaultNavBar();
+		},
+		//页面刷新时  初始化顶部按钮
+		getDefaultNavBar:function() {
+			var navBar = JSON.parse(ykp.getSessionStorage('navBar'));
+			var flag = true;
+			if(navBar) {
+				$('.menuTab').each(function() {
+					if($(this).data('id') == navBar.url) {
+						if(!$(this).hasClass('active')) {
+							$(this).addClass('active').siblings('.menuTab').removeClass('active');
+							$.learuntab.scrollToTab(this);
+							$('.mainContent .LRADMS_iframe').each(function() {
+								if($(this).data('id') == navBar.url) {
+									$(this).show().siblings('.LRADMS_iframe').hide();
+									return false;
+								}
+							});
+						}
+						flag = false;
+						return false;
+					}
+				});
+				if(flag) {
+					var str = '<a href="javascript:;" class="active menuTab" data-num="'+ navBar.id +'" data-id="' + navBar.url + '">' + navBar.title + ' <i class="fa fa-remove"></i></a>';
+	                $('.menuTab').removeClass('active');
+	                var str1 = '<iframe class="LRADMS_iframe" id="iframe' + navBar.id + '" name="iframe' + navBar.id + '"  width="100%" height="100%" src="' + navBar.url + '" frameborder="0" data-id="' + navBar.url + '" seamless></iframe>';
+	                $('.mainContent').find('iframe.LRADMS_iframe').hide();
+	                $('.mainContent').append(str1);
+	                //$.loading(true);
+	                $('.mainContent iframe:visible').load(function () {
+	                    //$.loading(false);
+	                });
+	                $('.menuTabs .page-tabs-content').append(str);
+	                $.learuntab.scrollToTab($('.menuTab.active'));
+				}
+			}
+		},
+		
+		
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		function hello(){
+			alert(1);
+		}
+	})
+</script>
+</body>
+
+</html>

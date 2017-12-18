@@ -1,0 +1,88 @@
+{% include 'admin/iheader.html' %}
+{% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+<script>
+	ykp.defineClass(['element', "jquery"], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initTabel();
+		},
+		initTabel: function() {
+			hm.load(function(option) {
+				var table = option.table;
+				var public = option.public;
+				public.showTable({
+					topTool: {
+						btnArr: [{title: "添加",type: "add"}, 
+						{title: "高级搜索",type: "hSearch",},
+						{title: "批量删除",type: "pldelete",class: "layui-btn-danger"},
+						{title: "导入",type: "improt"},
+						{title: "导出",type: "export"}]
+					},
+					cols: [{checkbox: true,},
+						{field: "um_company_service-id",width: 80,title: "ID",type: "",sear: "um_company_service-id"},
+						{field: "um_company_service-name",width: 80,title: "服务名称",type: "",sear: "um_company_service-name"},
+						{field: "um_company_service-cate_id",width: 80,title: "大类ID",type: "select",sear: "um_company_service-cate_id",enum: {0:"专业企服",1:"技孵宝",2:"培训",3:"传媒",4:"场地企服"}},
+						{field: "um_company_service-industry_id",width: 150,title: "行业ID",type: "",sear: "um_company_service-industry_id"},
+						{field: "um_company_service-type",width: 150,title: "服务类型",type: "select",sear: "um_company_service-type",enum: {0:"未知",1:"专业培训",2:"IT服务",3: "视觉设计",4:"政策解读",5:"法律服务"}},
+						{field: "um_company_service-child_type",width: 150,title: "类型细分",type: "select",sear: "um_company_service-child_type",enum: {0:"未知",1:"企业培训",2:"创业培训",3:"融资培训"}},
+						{field: "um_company_service-city_ids",width: 150,title: "城市ID",type: "",sear: "um_company_service-city_ids"},
+						{field: "um_company_service-sell_label",width: 150,title: "卖点标签",type: "",sear: "um_company_service-sell_label"},
+						{field: "um_company_service-promise_label",width: 200,title: "服务承诺标签",type: "",sear: "um_company_service-promise_label"},
+						{field: "um_company_service-uv",width: 180,title: "访问量",align: "center",sear: "um_company_service-uv"},
+						{field: "um_company_service-price",width: 150,title: "价格",type: "",sear:"um_company_service-price"},
+						{field: "um_company_service-collect_num",width: 150,title: "收藏量",type: "",sear: "um_company_service-collect_num"},
+						{field: "um_company_service-introduce",width: 200,sort: true,title: "产品介绍",type: "",sear: "um_company_service-introduce"},
+						{field: "um_company_service-create_at",width: 180,title: "创建时间",align: "center",type: "time",sear: "um_company_service-create_at"},
+						{field: "um_company-company_name",width: 180,title: "公司ID",align: "center",type: "",sear: "um_company-company_id"},
+						{field: "right", width: 180, title: "操作", toolbar: $('#barDemo'), align: "left", fixed: 'right', }
+					],
+					reader: {
+						elem: "#tabel_user",
+						url: "{{base_url}}admin/api_company_service/grid",
+						method: "post",
+						id: 'tabel_user',
+						where: {
+							filter: ""
+						},
+						data: getData
+					},
+					autoCol: true, //自定义列表,
+					tool: {
+						id: "um_company_service-id",  //该行id字段名
+						//是否执行跳转页面操作    true 不跳转  false 跳转  默认为false
+						Event: [{type: "edit",url: '{{base_url}}admin/user/edit_Company_service?id='},
+							{type: "detail",url: '{{base_url}}admin/user/info_Company_service?id='},
+							{type: "del",url: '{{base_url}}admin/api_company_service/delete'}
+						]
+					},
+					topBtnActive: {
+						Event: [{type: "add",url: '{{base_url}}admin/user/add_Company_service'},
+							{type: "plDel",url: '{{base_url}}admin/api_company_service/delete'}, 
+							{type: "improt",url: "/upload"},
+							{type: "export",url: "/upload"}
+						]
+					}
+				});
+			});
+			
+			function getData(res,callback) {
+				console.log(res);
+				if(typeof callback == 'function') {
+					callback(res.data);
+				}
+				console.log(res.data);
+			}
+		}
+	});
+</script>
+</body>
+
+</html>

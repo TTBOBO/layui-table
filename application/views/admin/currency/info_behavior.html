@@ -1,0 +1,82 @@
+{% include 'admin/iheader.html' %} {% include 'admin/crumbs.html' %}
+<table class="layui-hide" id="tabel_user" lay-filter="tabel_user"></table>
+{% include 'admin/import.html' %}
+<div id="" style="padding: 30px;">
+	<ul class="layui-timeline">
+		<li class="layui-timeline-item">
+			<i class="layui-icon layui-timeline-axis"></i>
+			<div class="layui-timeline-content layui-text">
+				<div class="layui-timeline-title">2018年，layui 5.0 发布。并发展成为中国最受欢迎的前端UI框架（期望）</div>
+			</div>
+		</li>
+		<li class="layui-timeline-item">
+			<i class="layui-icon layui-timeline-axis"></i>
+			<div class="layui-timeline-content layui-text">
+				<div class="layui-timeline-title">2017年，layui 里程碑版本 2.0 发布</div>
+			</div>
+		</li>
+		<li class="layui-timeline-item">
+			<i class="layui-icon layui-timeline-axis"></i>
+			<div class="layui-timeline-content layui-text">
+				<div class="layui-timeline-title">2016年，layui 首个版本发布</div>
+			</div>
+		</li>
+		<li class="layui-timeline-item">
+			<i class="layui-icon layui-timeline-axis"></i>
+			<div class="layui-timeline-content layui-text">
+				<div class="layui-timeline-title">2015年，layui 孵化</div>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<!-- 其他服务管理 -->
+<script>
+	ykp.defineClass(['element', "jquery", 'laytpl'], {
+		init: function() {
+			var it = this;
+			//初始化列表
+			it.initPage();
+		},
+		initPage: function() {
+			/*ykp.doAjax({
+				url: "",
+				method: "post",
+				data: {},
+				success: function(res) {
+					var data = res.data;
+				}
+			})*/
+
+			var data = [{
+				title: "123123",
+				time: "2017-12-05 09:19"
+			}, {
+				title: "123123",
+				time: "2017-12-05 09:19"
+			}, {
+				title: "123123",
+				time: "2017-12-05 09:19"
+			}, {
+				title: "123123",
+				time: "2017-12-05 09:19"
+			}];
+			var content = "";
+			for(var i in data) {
+				content +=  `<li class="layui-timeline-item">
+				    <i class="layui-icon layui-timeline-axis"></i>
+				    <div class="layui-timeline-content layui-text">
+				      <h3 class="layui-timeline-title">${data[i].time}</h3>
+				      <p>
+				       ${data[i].title}
+				      </p>
+				    </div>
+				  </li>`;
+			}
+			$('.layui-timeline').html(content);
+		}
+	});
+</script>
+</body>
+
+</html>
